@@ -95,13 +95,15 @@ class TableController extends Controller
             ]);
             })->make(true);
     }
+
+    $database = Database::find($id);
 $html = $htmlBuilder
 ->addColumn(['data' => 'nama_table', 'name'=>'nama_database', 'title'=>'Nama Table'])
 ->addColumn(['data' => 'keterangan', 'name'=>'keterangan', 'title'=>'keterangan'])
 ->addColumn(['data' => 'name', 'name'=>'name', 'title'=>'User'])
 ->addColumn(['data' => 'tanggal', 'name'=>'tanggal', 'title'=>'Tanggal'])
 ->addColumn(['data' => 'action', 'name'=>'action', 'title'=>'', 'orderable'=>false, 'searchable'=>false]);
-return view('table.index',['id_database' => $id])->with(compact('html'));
+return view('table.index',['id_database' => $id,'nama_database' => $database->nama_database])->with(compact('html'));
 
 
     }

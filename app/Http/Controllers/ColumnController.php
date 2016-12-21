@@ -102,8 +102,9 @@ class ColumnController extends Controller
     }
 
 
-    $table = Table::find($id);
-
+    $column = Column::find($id);
+    $table = Table::find($column->id_table);
+    $database = Database::find($table->id_database);
 $html = $htmlBuilder
 ->addColumn(['data' => 'nama_column', 'name'=>'nama_column', 'title'=>'Nama Column'])
 ->addColumn(['data' => 'keterangan', 'name'=>'keterangan', 'title'=>'keterangan'])
@@ -113,7 +114,7 @@ $html = $htmlBuilder
 ->addColumn(['data' => 'status_unique', 'name'=>'status_unique', 'title'=>'status_unique'])
 ->addColumn(['data' => 'action', 'name'=>'action', 'title'=>'', 'orderable'=>false, 'searchable'=>false]);
 
-return view('column.index',['id_table' => $id,'id_database' => $table->id_database ])->with(compact('html'));
+return view('column.index',['id_table' => $id,'id_database' => $table->id_database ,'nama_table' => $table->nama_table,'nama_database' => $database->nama_database])->with(compact('html'));
 
 
     }
