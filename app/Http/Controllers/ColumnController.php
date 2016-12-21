@@ -83,7 +83,6 @@ class ColumnController extends Controller
 
          if ($request->ajax()) {
 
-
       $column = DB::table('columns')
                 ->leftJoin('users', 'users.id', '=', 'columns.id_user')
                ->select('columns.*', 'users.name')->where('id_table',$id)
@@ -101,6 +100,10 @@ class ColumnController extends Controller
             ]);
             })->make(true);
     }
+
+
+    $table = Table::find($id);
+
 $html = $htmlBuilder
 ->addColumn(['data' => 'nama_column', 'name'=>'nama_column', 'title'=>'Nama Column'])
 ->addColumn(['data' => 'keterangan', 'name'=>'keterangan', 'title'=>'keterangan'])
@@ -110,7 +113,7 @@ $html = $htmlBuilder
 ->addColumn(['data' => 'status_unique', 'name'=>'status_unique', 'title'=>'status_unique'])
 ->addColumn(['data' => 'action', 'name'=>'action', 'title'=>'', 'orderable'=>false, 'searchable'=>false]);
 
-return view('column.index',['id_table' => $id])->with(compact('html'));
+return view('column.index',['id_table' => $id,'id_database' => $table->id_database ])->with(compact('html'));
 
 
     }

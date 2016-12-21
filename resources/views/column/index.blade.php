@@ -6,7 +6,7 @@
 <ul class="breadcrumb">
 <li><a href="{{ url('/home') }}">Dashboard</a></li>
 <li ><a href="{{ url('/tracking/database/') }}">Database</a></li>
-<li ><a href="{{ url('/tracking/table/') }}/{!! $id_table !!}">Table</a></li>
+<li ><a href="{{ url('/tracking/table/') }}/{!! $id_database !!}">Table</a></li>
 <li class="active">Column</li>
 </ul>
 <div class="panel panel-default">
