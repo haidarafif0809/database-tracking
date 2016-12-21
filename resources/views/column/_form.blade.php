@@ -34,7 +34,7 @@
 <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
 {!! Form::label('status_unique', 'Status unique', ['class'=>'col-md-2 control-label']) !!}
 <div class="col-md-4">
-{!! Form::select('status_unique', array('1' => 'True', '0' => 'False'),null,array('class' => 'form-control')) !!}
+{!! Form::select('status_unique', array('0' => 'False', '1' => 'True'),null,array('class' => 'form-control')) !!}
 {!! $errors->first('status_unique', '<p class="help-block">:message</p>') !!}
 </div>
 </div>
@@ -42,7 +42,7 @@
 <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
 {!! Form::label('status_increment', 'Status increment', ['class'=>'col-md-2 control-label']) !!}
 <div class="col-md-4">
-{!! Form::select('status_increment', array('1' => 'True', '0' => 'False'),null,array('class' => 'form-control')) !!}
+{!! Form::select('status_increment', array('0' => 'False', '1' => 'True'),null,array('class' => 'form-control')) !!}
 {!! $errors->first('status_increment', '<p class="help-block">:message</p>') !!}
 </div>
 </div>
