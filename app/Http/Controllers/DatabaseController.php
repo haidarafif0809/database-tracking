@@ -189,8 +189,11 @@ $query = "";
                 $query .= " ".$columns->tipe_data;
 
                 //length nya
-
-                $query .= "(".$columns->length.")";
+                if ($columns->length != 0) {
+                    # code...
+                    $query .= "(".$columns->length.")";
+                }
+                
 
                 //status increment 
 
