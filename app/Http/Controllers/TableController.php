@@ -96,7 +96,7 @@ class TableController extends Controller
             })->make(true);
     }
 $html = $htmlBuilder
-->addColumn(['data' => 'nama_table', 'name'=>'nama_database', 'title'=>'Nama Database'])
+->addColumn(['data' => 'nama_table', 'name'=>'nama_database', 'title'=>'Nama Table'])
 ->addColumn(['data' => 'keterangan', 'name'=>'keterangan', 'title'=>'keterangan'])
 ->addColumn(['data' => 'name', 'name'=>'name', 'title'=>'User'])
 ->addColumn(['data' => 'tanggal', 'name'=>'tanggal', 'title'=>'Tanggal'])
