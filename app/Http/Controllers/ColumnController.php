@@ -127,7 +127,8 @@ return view('column.index',['id_table' => $id])->with(compact('html'));
         //
 
         $column = Column::find($id);
-          return view('column.edit',['column'=> $column ,'id_table' => $id ]);
+
+          return view('column.edit',['column'=> $column ,'id_table' => $column->id_table ]);
     }
 
     /**
