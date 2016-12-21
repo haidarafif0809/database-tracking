@@ -16,6 +16,11 @@ class CreateColumnsTable extends Migration
         Schema::create('columns', function (Blueprint $table) {
             $table->increments('id');
             $table->string('nama_column');
+            $table->string('tipe_data');
+            $table->integer('status_increment');
+            $table->integer('status_null');
+            $table->integer('status_unique');
+            $table->integer('length');
             $table->integer('id_user');
             $table->integer('id_table');
             $table->string('keterangan')->nullable();

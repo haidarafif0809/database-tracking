@@ -11,7 +11,13 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Styles -->
-    <link href="/css/app.css" rel="stylesheet">
+ <!-- Styles -->
+    <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
+
+  <link href="{{ asset('css/dataTables.bootstrap.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/font-awesome.min.css') }}" rel="stylesheet">
+     <link href="{{ asset('css/bootstrap-datepicker.standalone.min.css') }}" rel="stylesheet">
+
 
     <!-- Scripts -->
     <script>
@@ -43,7 +49,12 @@
                 <div class="collapse navbar-collapse" id="app-navbar-collapse">
                     <!-- Left Side Of Navbar -->
                     <ul class="nav navbar-nav">
-                        &nbsp;
+                        @if (Auth::check())
+                        <li><a href="{{ url('/home') }}">Dashboard</a></li>
+                        <li><a href="{{ url('/tracking/database') }}">Database</a></li>
+                   
+                     
+                        @endif
                     </ul>
 
                     <!-- Right Side Of Navbar -->
@@ -81,7 +92,15 @@
         @yield('content')
     </div>
 
-    <!-- Scripts -->
-    <script src="/js/app.js"></script>
+
+
+ <!-- Scripts -->
+    <script src="{{ asset('js/tether.min.js') }}"></script>
+    <script src="{{ asset('js/jquery-3.1.1.min.js') }}"></script>
+    <script src="{{ asset('js/bootstrap.min.js') }}"></script>
+        <script src="{{ asset('js/jquery.dataTables.js') }}"></script>
+          <script src="{{ asset('js/dataTables.bootstrap.js') }}"></script>
+             <script src="{{ asset('js/bootstrap-datepicker.min.js') }}"></script>
+    @yield('scripts')
 </body>
 </html>
