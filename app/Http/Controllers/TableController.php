@@ -116,7 +116,8 @@ return view('table.index',['id_database' => $id])->with(compact('html'));
     {
         //
         $table = Table::find($id);
-         return view('table.edit',['id_database'=> $id,'table' => $table ]);
+
+         return view('table.edit',['id_database'=> $table->id_database,'table' => $table ]);
     }
 
     /**
