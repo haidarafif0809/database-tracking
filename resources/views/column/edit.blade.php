@@ -5,9 +5,9 @@
 <div class="col-md-12">
 <ul class="breadcrumb">
 <li><a href="{{ url('/home') }}">Dashboard</a></li>
-<li><a href="{{ url('/admin/kategori-tugas') }}">Database</a></li>
-<li><a href="{{ url('/admin/kategori-tugas') }}">Table</a></li>
-<li><a href="{{ url('/admin/kategori-tugas') }}">Column</a></li>
+<li><a href="{{ url('/tracking/database') }}">Database</a></li>
+<li><a href="{{ url('/tracking/table') }}/{{ $id_database }}">Table</a></li>
+<li><a href="{{ url('/tracking/column') }}/{{ $id_table }}">Column</a></li>
 <li class="active">Ubah Column</li>
 </ul>
 <div class="panel panel-default">

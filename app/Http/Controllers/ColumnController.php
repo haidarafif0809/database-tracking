@@ -132,8 +132,11 @@ return view('column.index',['id_table' => $id,'id_database' => $table->id_databa
         //
 
         $column = Column::find($id);
+        $table = Table::find($column->id_table);
+        $id_database = $table->id_database;
 
-          return view('column.edit',['column'=> $column ,'id_table' => $column->id_table ]);
+
+          return view('column.edit',['column'=> $column ,'id_table' => $column->id_table,'id_database' => $id_database ]);
     }
 
     /**
