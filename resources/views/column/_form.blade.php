@@ -31,7 +31,15 @@
 </div>
 </div>
 
-<div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
+<div class="form-group{{ $errors->has('default') ? ' has-error' : '' }}">
+{!! Form::label('default', 'Default', ['class'=>'col-md-2 control-label']) !!}
+<div class="col-md-4">
+{!! Form::text('default', null, ['class'=>'form-control']) !!}
+{!! $errors->first('default', '<p class="help-block">:message</p>') !!}
+</div>
+</div>
+
+<div class="form-group{{ $errors->has('status_unique') ? ' has-error' : '' }}">
 {!! Form::label('status_unique', 'Status unique', ['class'=>'col-md-2 control-label']) !!}
 <div class="col-md-4">
 {!! Form::select('status_unique', array('0' => 'False', '1' => 'True'),null,array('class' => 'form-control')) !!}

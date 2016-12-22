@@ -65,6 +65,7 @@ class ColumnController extends Controller
          $column->status_null = $request->status_null;
          $column->status_unique =$request->status_unique;
           $column->length =$request->length;
+           $column->default =$request->default;
          $column->id_table = $request->id_table;
          $column->keterangan = $request->keterangan;
          $column->save();
@@ -112,6 +113,7 @@ $html = $htmlBuilder
 ->addColumn(['data' => 'tipe_data', 'name'=>'tipe_data', 'title'=>'tipe_data'])
 ->addColumn(['data' => 'status_increment', 'name'=>'status_increment', 'title'=>'status_increment'])
 ->addColumn(['data' => 'status_null', 'name'=>'status_null', 'title'=>'status_null'])
+->addColumn(['data' => 'default', 'name'=>'default', 'title'=>'Default'])
 ->addColumn(['data' => 'status_unique', 'name'=>'status_unique', 'title'=>'status_unique'])
 ->addColumn(['data' => 'action', 'name'=>'action', 'title'=>'', 'orderable'=>false, 'searchable'=>false]);
 
@@ -167,6 +169,7 @@ return view('column.index',['id_table' => $id,'id_database' => $table->id_databa
          $column->status_null = $request->status_null;
          $column->status_unique =$request->status_unique;
           $column->length =$request->length;
+           $column->default =$request->default;
          $column->id_table = $request->id_table;
          $column->keterangan = $request->keterangan;
          $column->save();

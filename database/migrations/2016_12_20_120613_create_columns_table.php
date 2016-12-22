@@ -19,6 +19,7 @@ class CreateColumnsTable extends Migration
             $table->string('tipe_data');
             $table->integer('status_increment');
             $table->integer('status_null');
+               $table->string('default')->nullable();
             $table->integer('status_unique');
             $table->integer('length');
             $table->integer('id_user');
