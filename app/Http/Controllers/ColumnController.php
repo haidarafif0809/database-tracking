@@ -103,8 +103,8 @@ class ColumnController extends Controller
     }
 
 
-    $column = Column::find($id);
-    $table = Table::find($column->id_table);
+
+    $table = Table::find($id);
     $database = Database::find($table->id_database);
 $html = $htmlBuilder
 ->addColumn(['data' => 'nama_column', 'name'=>'nama_column', 'title'=>'Nama Column'])
