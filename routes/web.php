@@ -34,6 +34,11 @@ Route::get('/column/create/{id}', 'ColumnController@create');
 
 Route::get('/trigger/create/{id}', 'TriggerController@create');
 
+Route::get('/history',[
+'middleware' => ['auth'],
+'as' => 'database.history',
+'uses' => 'DatabaseController@history'
+] );
 
 
 Route::get('/database/export/{id}',[

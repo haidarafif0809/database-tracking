@@ -12,6 +12,7 @@ use Session;
 use File;
 use App\Table;
 use App\Column;
+use App\History;
 
 class DatabaseController extends Controller
 {
@@ -89,6 +90,13 @@ return view('database.index')->with(compact('html'));
      $database->tanggal = $tanggal;
         $database->keterangan = $request->keterangan;
      $database->save();
+
+     $history = new History();
+     $history->id_user = $id_user;
+     $history->kejadian = "Menambah database dengan nama $database->nama_database";
+     $history->link = "/tracking/database/$database->id";
+     $history->save();
+
        
     return redirect('/tracking/database');
     }
@@ -102,6 +110,29 @@ return view('database.index')->with(compact('html'));
     public function show($id)
     {
         //
+    }
+
+    public function history(Request $request, Builder $htmlBuilder)
+    {
+        //
+
+        if ($request->ajax()) {
+
+
+      $history = DB::table('histories')
+                ->leftJoin('users', 'users.id', '=', 'histories.id_user')
+               ->select('histories.*', 'users.name')
+                ->orderBy('histories.created_at', 'desc')->get();
+
+
+            return Datatables::of($history)->make(true);
+    }
+$html = $htmlBuilder
+->addColumn(['data' => 'name', 'name'=>'name', 'title'=>'User'])
+->addColumn(['data' => 'kejadian', 'name'=>'kejadian', 'title'=>'Kejadian'])
+->addColumn(['data' => 'created_at', 'name'=>'created_at', 'title'=>'Waktu'])
+->addColumn(['data' => 'link', 'name'=>'link', 'title'=>'Link', 'orderable'=>false, 'searchable'=>false]);
+return view('history.index')->with(compact('html'));
     }
 
     /**
@@ -136,12 +167,19 @@ return view('database.index')->with(compact('html'));
         $id_user = Auth::user()->id;
 
      $database =  Database::find($id);
+     $nama_lama_database = $database->nama_database;
      $database->nama_database = $request->nama_database;
      $database->id_user = $id_user;
      $database->tanggal = $tanggal;
         $database->keterangan = $request->keterangan;
      $database->save();
        
+      $history = new History();
+     $history->id_user = $id_user;
+     $history->kejadian = "Mengubah nama database $nama_lama_database menjadi $database->nama_database";
+     $history->link = "/tracking/database/$database->id";
+     $history->save();
+
     return redirect('/tracking/database');
     }
 
@@ -154,12 +192,21 @@ return view('database.index')->with(compact('html'));
     public function destroy($id)
     {
         //
+    $database = Database::find($id);
+    $id_user = Auth::user()->id;
+     $history = new History();
+     $history->id_user = $id_user;
+     $history->kejadian = "Menghapus database $database->nama_database";
+     $history->link = "/tracking/database/$database->id";
+     $history->save();
 
         Database::destroy($id);
+
         return redirect()->back();
 
     }
 
+  
     public function export_database($id){
 
         //ambil table dengan id database yang dipilih

@@ -12,6 +12,7 @@ use App\Database;
 use Auth;
 use Session;
 use File;
+use App\History;
 
 
 class ColumnController extends Controller

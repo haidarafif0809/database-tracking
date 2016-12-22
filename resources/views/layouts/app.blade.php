@@ -52,6 +52,7 @@
                         @if (Auth::check())
                         <li><a href="{{ url('/home') }}">Dashboard</a></li>
                         <li><a href="{{ url('/tracking/database') }}">Database</a></li>
+                         <li><a href="{{ url('/tracking/history') }}">History</a></li>
                    
                      
                         @endif

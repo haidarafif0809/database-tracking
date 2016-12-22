@@ -18,6 +18,7 @@ class CreateHistoriesTable extends Migration
             $table->integer('id_user');
             $table->string('kejadian');
             $table->string('alasan')->nullable();
+            $table->string('link')->nullable();
 
             $table->timestamps();
         });

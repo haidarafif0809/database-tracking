@@ -11,6 +11,7 @@ use App\Database;
 use Auth;
 use Session;
 use File;
+use App\History;
 
 class TableController extends Controller
 {
@@ -60,6 +61,14 @@ class TableController extends Controller
      $table->id_database = $request->id_database;
      $table->keterangan = $request->keterangan;
      $table->save();
+
+     $database = Database::find($table->id_database);
+
+     $history = new History();
+     $history->id_user = $id_user;
+     $history->kejadian = "Menambah table $table->nama_table di database $database->nama_database";
+     $history->link = "/tracking/table/$table->id";
+     $history->save();
        
     return redirect("/tracking/table/$request->id_database");
     }
@@ -141,12 +150,22 @@ return view('table.index',['id_database' => $id,'nama_database' => $database->na
         $id_user = Auth::user()->id;
 
      $table = Table::find($id);
+     $nama_lama = $table->nama_table;
      $table->nama_table = $request->nama_table;
      $table->id_user = $id_user;
      $table->tanggal = $tanggal;
      $table->id_database = $request->id_database;
      $table->keterangan = $request->keterangan;
      $table->save();
+
+
+
+    $database = Database::find($table->id_database);
+    $history = new History()    ;
+     $history->id_user = $id_user;
+     $history->kejadian = "Mengubah nama table $nama_lama menjadi $table->nama_table di database $database->nama_database";
+     $history->link = "/tracking/table/$request->id_database";
+     $history->save();
        
     return redirect("/tracking/table/$request->id_database");
     }
@@ -160,6 +179,14 @@ return view('table.index',['id_database' => $id,'nama_database' => $database->na
     public function destroy($id)
     {
         //
+ $id_user = Auth::user()->id;
+  $table = Table::find($id);
+  $database = Database::find($table->id_database);
+    $history = new History();
+     $history->id_user = $id_user;
+     $history->kejadian = "Menghapus table $table->nama_table di database $database->nama_database";
+     $history->link = "/tracking/table/$table->id";
+     $history->save();
 
         Table::destroy($id);
           return redirect()->back();
