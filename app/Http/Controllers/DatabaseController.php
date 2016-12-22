@@ -15,6 +15,7 @@ use App\Column;
 use App\History;
 use Telegram\Bot\Api;
 use Telegram;
+
 class DatabaseController extends Controller
 {
     /**
@@ -97,6 +98,11 @@ return view('database.index')->with(compact('html'));
      $history->kejadian = "Menambah database dengan nama $database->nama_database";
      $history->link = "/tracking/database/$database->id";
      $history->save();
+
+     Session::flash("flash_notification", [
+    "level"=>"success",
+    "message"=>"Berhasil menyimpan database $database->nama_database"
+    ]);
 
        
     return redirect('/tracking/database');
@@ -181,6 +187,11 @@ return view('history.index')->with(compact('html'));
      $history->link = "/tracking/database/$database->id";
      $history->save();
 
+     Session::flash("flash_notification", [
+    "level"=>"success",
+    "message"=>"Berhasil mengubah database    $nama_lama_database menjadi $database->nama_database"
+    ]);
+
     return redirect('/tracking/database');
     }
 
@@ -200,6 +211,11 @@ return view('history.index')->with(compact('html'));
      $history->kejadian = "Menghapus database $database->nama_database";
      $history->link = "/tracking/database/$database->id";
      $history->save();
+
+      Session::flash("flash_notification", [
+    "level"=>"success",
+    "message"=>"Berhasil menghapus database $database->nama_database"
+    ]);
 
         Database::destroy($id);
 
@@ -258,6 +274,10 @@ $query = "";
                 }
                 elseif($columns->status_null == 0 AND $columns->status_increment == 0) {
                      $query .= " NOT NULL";
+                     if ($columns->default != "") {
+                         # code...
+                        $query .= " DEFAULT(".$columns->default.")";
+                     }
                 }
 
                 if ($columns->status_unique == 1  AND $columns->status_increment != 1 ) {

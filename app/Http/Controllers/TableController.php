@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Table;
 use Yajra\Datatables\Html\Builder;
 use Yajra\Datatables\Datatables;
+use Yajra\Datatables\Datatables\Eloquent;
 use Illuminate\Support\Facades\DB;
 use App\Database;
 use Auth;
@@ -56,7 +57,7 @@ class TableController extends Controller
 
      $table = new  Table();
      $table->nama_table = $request->nama_table;
-     $table->id_user = $id_user;
+     $table->user_id = $id_user;
      $table->tanggal = $tanggal;
      $table->id_database = $request->id_database;
      $table->keterangan = $request->keterangan;
@@ -69,6 +70,11 @@ class TableController extends Controller
      $history->kejadian = "Menambah table $table->nama_table di database $database->nama_database";
      $history->link = "/tracking/table/$table->id";
      $history->save();
+
+           Session::flash("flash_notification", [
+    "level"=>"success",
+    "message"=>"Berhasil menambah table $table->nama_table"
+    ]);
        
     return redirect("/tracking/table/$request->id_database");
     }
@@ -86,10 +92,14 @@ class TableController extends Controller
          if ($request->ajax()) {
 
 
-      $table = DB::table('tables')
+      $table = Table::with('user');
+
+      /*DB::table('tables')
                 ->leftJoin('users', 'users.id', '=', 'tables.id_user')
                ->select('tables.*', 'users.name')->where('id_database',$id)
-                ->orderBy('tables.tanggal', 'desc')->get();
+                ->orderBy('tables.tanggal', 'desc');
+
+                */
 
 
             return Datatables::of($table)->addColumn('action', function($table){
@@ -107,10 +117,10 @@ class TableController extends Controller
 
     $database = Database::find($id);
 $html = $htmlBuilder
-->addColumn(['data' => 'nama_table', 'name'=>'nama_database', 'title'=>'Nama Table'])
-->addColumn(['data' => 'keterangan', 'name'=>'keterangan', 'title'=>'keterangan'])
-->addColumn(['data' => 'name', 'name'=>'name', 'title'=>'User'])
-->addColumn(['data' => 'tanggal', 'name'=>'tanggal', 'title'=>'Tanggal'])
+->addColumn(['data' => 'nama_table', 'name'=>'nama_table', 'title'=>'Nama Table',])
+->addColumn(['data' => 'keterangan', 'name'=>'keterangan', 'title'=>'keterangan', 'searchable'=>false])
+->addColumn(['data' => 'user.name', 'name'=>'user.name', 'title'=>'User', 'searchable'=>false])
+->addColumn(['data' => 'tanggal', 'name'=>'tanggal', 'title'=>'Tanggal' ,'searchable'=>false])
 ->addColumn(['data' => 'action', 'name'=>'action', 'title'=>'', 'orderable'=>false, 'searchable'=>false]);
 return view('table.index',['id_database' => $id,'nama_database' => $database->nama_database])->with(compact('html'));
 
@@ -152,7 +162,7 @@ return view('table.index',['id_database' => $id,'nama_database' => $database->na
      $table = Table::find($id);
      $nama_lama = $table->nama_table;
      $table->nama_table = $request->nama_table;
-     $table->id_user = $id_user;
+     $table->user_id = $id_user;
      $table->tanggal = $tanggal;
      $table->id_database = $request->id_database;
      $table->keterangan = $request->keterangan;
@@ -166,6 +176,12 @@ return view('table.index',['id_database' => $id,'nama_database' => $database->na
      $history->kejadian = "Mengubah nama table $nama_lama menjadi $table->nama_table di database $database->nama_database";
      $history->link = "/tracking/table/$request->id_database";
      $history->save();
+
+             Session::flash("flash_notification", [
+    "level"=>"success",
+    "message"=>"Berhasil mengubah nama table $nama_lama menjadi  $table->nama_table"
+    ]);
+       
        
     return redirect("/tracking/table/$request->id_database");
     }
@@ -187,6 +203,12 @@ return view('table.index',['id_database' => $id,'nama_database' => $database->na
      $history->kejadian = "Menghapus table $table->nama_table di database $database->nama_database";
      $history->link = "/tracking/table/$table->id";
      $history->save();
+
+                  Session::flash("flash_notification", [
+    "level"=>"success",
+    "message"=>"Berhasil menghapus table $table->nama_table"
+    ]);
+       
 
         Table::destroy($id);
           return redirect()->back();

@@ -69,6 +69,13 @@ class ColumnController extends Controller
          $column->id_table = $request->id_table;
          $column->keterangan = $request->keterangan;
          $column->save();
+
+
+                  Session::flash("flash_notification", [
+    "level"=>"success",
+    "message"=>"Berhasil menambah column  $column->nama_column"
+    ]);
+       
        
     return redirect("/tracking/column/$request->id_table");
     }
@@ -173,6 +180,12 @@ return view('column.index',['id_table' => $id,'id_database' => $table->id_databa
          $column->id_table = $request->id_table;
          $column->keterangan = $request->keterangan;
          $column->save();
+
+      Session::flash("flash_notification", [
+    "level"=>"success",
+    "message"=>"Berhasil mengubah column  $column->nama_column"
+    ]);
+       
        
     return redirect("/tracking/column/$request->id_table");
     }
@@ -186,6 +199,12 @@ return view('column.index',['id_table' => $id,'id_database' => $table->id_databa
     public function destroy($id)
     {
         //
+$column = Column::find($id);
+     Session::flash("flash_notification", [
+    "level"=>"success",
+    "message"=>"Berhasil menghapus column  $column->nama_column"
+    ]);
+       
         Column::destroy($id);
         return redirect()->back();
 

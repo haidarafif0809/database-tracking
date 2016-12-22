@@ -16,7 +16,7 @@ class CreateTablesTable extends Migration
         Schema::create('tables', function (Blueprint $table) {
             $table->increments('id');
             $table->string('nama_table');
-            $table->integer('id_user');
+            $table->integer('user_id');
              $table->integer('id_database');
             $table->date('tanggal');
             $table->string('keterangan')->nullable();
