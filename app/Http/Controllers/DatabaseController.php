@@ -13,7 +13,8 @@ use File;
 use App\Table;
 use App\Column;
 use App\History;
-
+use Telegram\Bot\Api;
+use Telegram;
 class DatabaseController extends Controller
 {
     /**
@@ -311,6 +312,18 @@ DELIMITER $$";
 
 return $query;
        
+
+    }
+
+    public function telegram (){
+
+
+    $response = Telegram::getMe();
+
+    echo $botId = $response->getId();
+    echo $firstName = $response->getFirstName();
+    echo $username = $response->getUsername();
+
 
     }
 

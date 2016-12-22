@@ -19,6 +19,8 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index');
 
+Route::get('/telegram', 'DatabaseController@telegram');
+
 Route::group(['prefix'=>'tracking', 'middleware'=>['auth']], function () {
 Route::resource('database', 'DatabaseController');
 
