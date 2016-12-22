@@ -49,7 +49,7 @@ class ColumnController extends Controller
     {
         //
         $this->validate($request, [
-        'nama_column' => 'required',
+        'nama_column' => "required|unique:columns,nama_column,NULL,id,id_table,$request->id_table",
          'id_table' => 'required',
          'length' => 'required|numeric'
         ]);

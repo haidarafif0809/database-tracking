@@ -50,7 +50,7 @@ class TriggerController extends Controller
     {
         //
          $this->validate($request, [
-        'nama_trigger' => 'required|unique:triggers',
+        'nama_trigger' => "required|unique:triggers,nama_trigger,NULL,id,id_database,$request->id_database",
         'isi_trigger' => 'required',
         ]);
         $tanggal = date('Y-m-d');

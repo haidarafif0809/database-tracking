@@ -320,9 +320,7 @@ return $query;
 
     $response = Telegram::getMe();
 
-    echo $botId = $response->getId();
-    echo $firstName = $response->getFirstName();
-    echo $username = $response->getUsername();
+   return $response;
 
 
     }

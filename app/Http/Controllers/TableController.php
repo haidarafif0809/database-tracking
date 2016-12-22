@@ -48,7 +48,7 @@ class TableController extends Controller
         //
          
           $this->validate($request, [
-        'nama_table' => 'required',
+        'nama_table' => "required|unique:tables,nama_table,NULL,id,id_database,$request->id_database",
          'id_database' => 'required',
         ]);
         $tanggal = date('Y-m-d');
