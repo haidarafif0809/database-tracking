@@ -12,6 +12,7 @@ use App\Database;
 use Auth;
 use Session;
 use File;
+use Telegram;
 use App\History;
 
 class TableController extends Controller
@@ -54,7 +55,7 @@ class TableController extends Controller
         ]);
         $tanggal = date('Y-m-d');
         $id_user = Auth::user()->id;
-
+        $nama_user =  Auth::user()->name;
      $table = new  Table();
      $table->nama_table = $request->nama_table;
      $table->user_id = $id_user;
@@ -70,6 +71,11 @@ class TableController extends Controller
      $history->kejadian = "Menambah table $table->nama_table di database $database->nama_database";
      $history->link = "/tracking/table/$table->id";
      $history->save();
+
+      $response = Telegram::sendMessage([
+      'chat_id' => '-183930762', 
+      'text' => "$nama_user Membuat Table $table->nama_table di Database $database->nama_database "
+    ]);
 
            Session::flash("flash_notification", [
     "level"=>"success",
@@ -196,6 +202,7 @@ return view('table.index',['id_database' => $id,'nama_database' => $database->na
     {
         //
  $id_user = Auth::user()->id;
+ $nama_user = Auth::user()->name;
   $table = Table::find($id);
   $database = Database::find($table->id_database);
     $history = new History();
@@ -203,6 +210,11 @@ return view('table.index',['id_database' => $id,'nama_database' => $database->na
      $history->kejadian = "Menghapus table $table->nama_table di database $database->nama_database";
      $history->link = "/tracking/table/$table->id";
      $history->save();
+
+      $response = Telegram::sendMessage([
+      'chat_id' => '-183930762', 
+      'text' => "$nama_user Menghapus Table $table->nama_table di Database $database->nama_database "
+    ]);
 
                   Session::flash("flash_notification", [
     "level"=>"success",

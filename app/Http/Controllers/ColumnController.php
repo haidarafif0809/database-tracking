@@ -13,6 +13,7 @@ use Auth;
 use Session;
 use File;
 use App\History;
+use Telegram;
 
 
 class ColumnController extends Controller
@@ -58,6 +59,7 @@ class ColumnController extends Controller
         ]);
         $tanggal = date('Y-m-d');
         $id_user = Auth::user()->id;
+        $nama_user = Auth::user()->name;
 
          $column = new  Column();
          $column->nama_column = $request->nama_column;
@@ -73,12 +75,20 @@ class ColumnController extends Controller
          $column->keterangan = $request->keterangan;
          $column->save();
 
+         $table = Table::find($request->id_table);
+         $database = Database::find($table->id);
+
 
                   Session::flash("flash_notification", [
     "level"=>"success",
     "message"=>"Berhasil menambah column  $column->nama_column"
     ]);
        
+          $response = Telegram::sendMessage([
+      'chat_id' => '-183930762', 
+      'text' => "$nama_user Melakukan Penambahan Column $column->nama_column di Table $table->nama_table di Database $database->nama_database "
+    ]);
+
        
   return redirect("/tracking/column/$request->id_table");
     }
@@ -189,6 +199,13 @@ return view('column.index',['id_table' => $id,'id_database' => $table->id_databa
     "message"=>"Berhasil mengubah column  $column->nama_column"
     ]);
        
+        $nama_user = Auth::user()->name;
+ $table = Table::find($request->id_table);
+         $database = Database::find($table->id);
+  $response = Telegram::sendMessage([
+      'chat_id' => '-183930762', 
+      'text' => "$nama_user Melakukan Perubahan Column $column->nama_column di Table $table->nama_table di Database $database->nama_database "
+    ]);
        
     return redirect("/tracking/column/$request->id_table");
     }
@@ -207,6 +224,15 @@ $column = Column::find($id);
     "level"=>"success",
     "message"=>"Berhasil menghapus column  $column->nama_column"
     ]);
+
+           $nama_user = Auth::user()->name;
+ $table = Table::find($column->id_table);
+         $database = Database::find($table->id);
+  $response = Telegram::sendMessage([
+      'chat_id' => '-183930762', 
+      'text' => "$nama_user Menghapus Column $column->nama_column di Table $table->nama_table di Database $database->nama_database "
+    ]);
+       
        
         Column::destroy($id);
         return redirect()->back();

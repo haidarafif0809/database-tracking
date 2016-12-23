@@ -85,6 +85,7 @@ return view('database.index')->with(compact('html'));
         ]);
         $tanggal = date('Y-m-d');
         $id_user = Auth::user()->id;
+        $nama_user = Auth::user()->name;
 
      $database = new  Database();
      $database->nama_database = $request->nama_database;
@@ -98,6 +99,12 @@ return view('database.index')->with(compact('html'));
      $history->kejadian = "Menambah database dengan nama $database->nama_database";
      $history->link = "/tracking/database/$database->id";
      $history->save();
+
+     $response = Telegram::sendMessage([
+      'chat_id' => '-183930762', 
+      'text' => "$nama_user Membuat database $request->nama_database "
+    ]);
+
 
      Session::flash("flash_notification", [
     "level"=>"success",
@@ -206,6 +213,7 @@ return view('history.index')->with(compact('html'));
         //
     $database = Database::find($id);
     $id_user = Auth::user()->id;
+    $nama_user =  Auth::user()->name;
      $history = new History();
      $history->id_user = $id_user;
      $history->kejadian = "Menghapus database $database->nama_database";
@@ -215,6 +223,10 @@ return view('history.index')->with(compact('html'));
       Session::flash("flash_notification", [
     "level"=>"success",
     "message"=>"Berhasil menghapus database $database->nama_database"
+    ]);
+      $response = Telegram::sendMessage([
+      'chat_id' => '-183930762', 
+      'text' => "$nama_user Menghapus database $database->nama_database "
     ]);
 
         Database::destroy($id);
@@ -337,10 +349,7 @@ return $query;
 
     public function telegram (){
 
-
-    $response = Telegram::getMe();
-
-   return $response;
+   return $$messageId;
 
 
     }
