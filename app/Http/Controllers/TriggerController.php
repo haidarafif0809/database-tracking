@@ -35,8 +35,7 @@ class TriggerController extends Controller
     {
         //
 
-
-        $table = Table::where('id_database', $id)->get();
+ $table = Table::where('id_database', $id)->pluck('nama_table', 'id');
          return view('trigger.create',['id_database'=> $id,'table' => $table ]);
     }
 
@@ -127,9 +126,9 @@ return view('trigger.index',['id_database' => $id])->with(compact('html'));
     {
         //
         $trigger = Trigger::find($id);
- $table = Table::where('id_database', $trigger->id_database)->get();
+ $table = Table::where('id_database', $trigger->id_database)->pluck('nama_table', 'id');
 
-        return view('trigger.edit',['trigger' => $trigger,'table' => $table,'id_database' => $id]);
+        return view('trigger.edit',['trigger' => $trigger,'table' => $table,'id_database' => $trigger->id_database]);
     }
 
     /**

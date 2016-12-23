@@ -9,11 +9,8 @@
 <div class="form-group {!! $errors->has('id_table') ? 'has-error' : '' !!}">
 {!! Form::label('id_table', 'Table', ['class'=>'col-md-2 control-label']) !!}
 <div class="col-md-4">
-<select id="id_table" name="id_table" class="form-control">
-	@foreach($table as $tables)
-	<option value="{{ $tables->id }}">{{ $tables->nama_table }}</option>
-	@endforeach
-</select>
+{!! Form::select('id_table',$table, null,  array('class' => 'form-control')) !!}
+
 {!! $errors->first('id_table', '<p class="help-block">:message</p>') !!}
 </div>
 </div>
