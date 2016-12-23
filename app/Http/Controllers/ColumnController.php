@@ -165,7 +165,7 @@ return view('column.index',['id_table' => $id,'id_database' => $table->id_databa
          $this->validate($request, [
         'nama_column' => 'required',
          'id_table' => 'required',
-         'length' => 'required|numeric'
+         'length' => 'required'
         ]);
         $tanggal = date('Y-m-d');
         $id_user = Auth::user()->id;
