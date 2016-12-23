@@ -146,8 +146,8 @@ return view('column.index',['id_table' => $id,'id_database' => $table->id_databa
         $table = Table::find($column->id_table);
         $id_database = $table->id_database;
 
-
-          return view('column.edit',['column'=> $column ,'id_table' => $column->id_table,'id_database' => $id_database ]);
+     $status_increment = Column::where('id_table',$id)->where('status_increment',1)->count();
+          return view('column.edit',['column'=> $column ,'id_table' => $column->id_table,'id_database' => $id_database,'status_increment' => $status_increment ]);
     }
 
     /**
