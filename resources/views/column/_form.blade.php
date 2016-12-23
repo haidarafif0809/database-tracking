@@ -50,7 +50,18 @@
 <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
 {!! Form::label('status_increment', 'Status increment', ['class'=>'col-md-2 control-label']) !!}
 <div class="col-md-4">
+@if($status_increment == 0)
 {!! Form::select('status_increment', array('0' => 'False', '1' => 'True'),null,array('class' => 'form-control')) !!}
+
+@else 
+{!! Form::select('status_increment', array('0' => 'False'),null,array('class' => 'form-control')) !!}
+
+@endif
+
+
+
+
+
 {!! $errors->first('status_increment', '<p class="help-block">:message</p>') !!}
 </div>
 </div>
