@@ -92,7 +92,7 @@ class TableController extends Controller
          if ($request->ajax()) {
 
 
-      $table = Table::with('user');
+      $table = Table::with('user')->where('id_database' , $id);
 
       /*DB::table('tables')
                 ->leftJoin('users', 'users.id', '=', 'tables.id_user')
