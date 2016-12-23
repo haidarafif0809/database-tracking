@@ -37,7 +37,8 @@ class ColumnController extends Controller
         //
 
         $status_increment = Column::where('id_table',$id)->where('status_increment',1)->count();
-        return view('column.create',['id_table'=> $id,'status_increment' => $status_increment ]);
+        $id_database = Table::find($id);
+        return view('column.create',['id_table'=> $id,'id_database' =>$id_database ,'status_increment' => $status_increment ]);
     }
     
 
