@@ -54,7 +54,7 @@ class ColumnController extends Controller
         $this->validate($request, [
         'nama_column' => "required|unique:columns,nama_column,NULL,id,id_table,$request->id_table",
          'id_table' => 'required',
-         'length' => 'required|numeric'
+         'length' => 'required'
         ]);
         $tanggal = date('Y-m-d');
         $id_user = Auth::user()->id;
@@ -68,7 +68,7 @@ class ColumnController extends Controller
          $column->status_null = $request->status_null;
          $column->status_unique =$request->status_unique;
           $column->length =$request->length;
-           $column->default =$request->default;
+           $column->default = $request->default;
          $column->id_table = $request->id_table;
          $column->keterangan = $request->keterangan;
          $column->save();
@@ -80,7 +80,7 @@ class ColumnController extends Controller
     ]);
        
        
-    return redirect("/tracking/column/$request->id_table");
+  return redirect("/tracking/column/$request->id_table");
     }
 
     /**
