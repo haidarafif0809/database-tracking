@@ -276,7 +276,7 @@ $query = "";
                      $query .= " NOT NULL";
                      if ($columns->default != "") {
                          # code...
-                        $query .= " DEFAULT(".$columns->default.")";
+                        $query .= " DEFAULT '".$columns->default."'";
                      }
                 }
 
