@@ -17,7 +17,7 @@
 <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
 {!! Form::label('tipe_data', 'Tipe Data', ['class'=>'col-md-2 control-label']) !!}
 <div class="col-md-4">
-{!! Form::select('tipe_data', array('integer' => 'integer','double' => 'double', 'varchar' => 'String','date' => 'date','datetime' => 'datetime' ,'time' => 'time','text' => 'text'),null,array('class' => 'form-control')) !!}
+{!! Form::select('tipe_data', array('integer' => 'integer','double' => 'double', 'varchar' => 'String','date' => 'date','datetime' => 'datetime' ,'time' => 'time','timestamp' => 'timestamp','text' => 'text'),null,array('class' => 'form-control')) !!}
 {!! $errors->first('tipe_data', '<p class="help-block">:message</p>') !!}
 </div>
 </div>

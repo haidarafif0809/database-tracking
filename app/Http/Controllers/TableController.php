@@ -14,6 +14,9 @@ use Session;
 use File;
 use Telegram;
 use App\History;
+use App\Column;
+use App\IndukData;
+use App\SampleData;
 
 class TableController extends Controller
 {
@@ -100,12 +103,7 @@ class TableController extends Controller
 
       $table = Table::with('user')->where('id_database' , $id);
 
-      /*DB::table('tables')
-                ->leftJoin('users', 'users.id', '=', 'tables.id_user')
-               ->select('tables.*', 'users.name')->where('id_database',$id)
-                ->orderBy('tables.tanggal', 'desc');
-
-                */
+  
 
 
             return Datatables::of($table)->addColumn('action', function($table){
@@ -115,6 +113,7 @@ class TableController extends Controller
             'edit_url' => route('table.edit', $table->id),
             'column_url' => route('column.show', $table->id),
             'hapus_url' => route('table.destroy',$table->id),
+            'sample_data_url' => route('table.sample',$table->id),
             'model' => $table,
             'id_user' =>  $id_user,
             ]);
@@ -225,4 +224,60 @@ return view('table.index',['id_database' => $id,'nama_database' => $database->na
         Table::destroy($id);
           return redirect()->back();
     }
+
+    public function sample_data($id){
+
+        $table = Table::find($id);
+
+        $column = Column::where('id_table',$id)->get();
+   
+    
+
+    }
+
+
+    public function create_sample_data($id){
+
+$table = Table::find($id);
+
+        $column = Column::where('id_table',$id)->get();
+   
+    return view('table.sample',['column' => $column,'id_table' => $table->id,'id_database' => $table->id_database]);
+
+    }
+     public function store_sample_data(Request $request){
+
+
+          $this->validate($request, [
+        'id_table' => 'required',
+         'id_database' => 'required',
+        ]);
+        $IndukData = IndukData::create(['id_table' => $request->id_table ,'id_database' => $request->id_database]);
+
+            $id_induk = $IndukData->id;
+              $column = Column::where('id_table',$request->id_table)->get();
+
+              foreach ($column as $columns) {
+                  # code...
+                $nama_column  = $columns->nama_column;
+                $sample_data = new SampleData();
+                $sample_data->id_induk = $id_induk ;
+                $sample_data->id_column = $columns->id;
+                $sample_data->id_database = $request->id_database;
+                $sample_data->id_table = $request->id_table ;
+                $sample_data->data =  $request->$nama_column; 
+                $sample_data->save();
+              }
+                          Session::flash("flash_notification", [
+    "level"=>"success",
+    "message"=>"Berhasil Membuat Sampe data "
+    ]);
+       
+
+                return redirect("/tracking/table/$request->id_database");
+     
+
+
+
+     }
 }

@@ -49,6 +49,26 @@ Route::get('/database/export/{id}',[
 'uses' => 'DatabaseController@export_database'
 ] );
 
+Route::get('/table/sample/{id}',[
+'middleware' => ['auth'],
+'as' => 'table.sample',
+'uses' => 'TableController@sample_data'
+] );
+
+
+
+Route::get('/table/sample/create/{id}',[
+'middleware' => ['auth'],
+'as' => 'sample.create',
+'uses' => 'TableController@create_sample_data'
+] );
+
+Route::post('/table/sample/create',[
+'middleware' => ['auth'],
+'as' => 'table.tambah_sample',
+'uses' => 'TableController@store_sample_data'
+] );
+
 Route::get('/database/export-trigger/{id}',[
 'middleware' => ['auth'],
 'as' => 'database.export-trigger',

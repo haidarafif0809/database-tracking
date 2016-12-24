@@ -76,7 +76,7 @@ class ColumnController extends Controller
          $column->save();
 
          $table = Table::find($request->id_table);
-         $database = Database::find($table->id);
+         $database = Database::find($table->id_database);
 
 
                   Session::flash("flash_notification", [
@@ -84,7 +84,7 @@ class ColumnController extends Controller
     "message"=>"Berhasil menambah column  $column->nama_column"
     ]);
        
-          $response = Telegram::sendMessage([
+    $response = Telegram::sendMessage([
       'chat_id' => '-183930762', 
       'text' => "$nama_user Melakukan Penambahan Column $column->nama_column di Table $table->nama_table di Database $database->nama_database "
     ]);
