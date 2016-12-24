@@ -21,11 +21,18 @@ Route::get('/home', 'HomeController@index');
 
 Route::get('/telegram', 'DatabaseController@telegram');
 
+Route::group(['prefix'=>'bug', 'middleware'=>['auth']], function () {
+
+	Route::resource('aplikasi', 'AplikasiController');
+
+
+});
 Route::group(['prefix'=>'tracking', 'middleware'=>['auth']], function () {
 Route::resource('database', 'DatabaseController');
 
 Route::resource('table', 'TableController');
 Route::resource('column', 'ColumnController');
+
 
 Route::resource('trigger', 'TriggerController');
 
