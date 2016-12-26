@@ -349,7 +349,10 @@ return $query;
 
     public function telegram (){
 
-   return $$messageId;
+$response = Telegram::getUpdates();
+
+
+return $response;
 
 
     }

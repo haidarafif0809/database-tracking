@@ -17,6 +17,8 @@ Route::get('/', function () {
 
 Auth::routes();
 
+Route::get('/telegram', 'DatabaseController@telegram');
+
 Route::get('/home', 'HomeController@index');
 
 Route::get('/telegram', 'DatabaseController@telegram');
@@ -24,6 +26,45 @@ Route::get('/telegram', 'DatabaseController@telegram');
 Route::group(['prefix'=>'bug', 'middleware'=>['auth']], function () {
 
 	Route::resource('aplikasi', 'AplikasiController');
+
+Route::resource('list', 'BugController');
+Route::resource('komentar', 'KomentarController');
+
+Route::get('/on-hold/{id}',[
+'middleware' => ['auth'],
+'as' => 'bug.onhold',
+'uses' => 'BugController@on_hold'
+] );
+
+Route::get('/deskripsi/{id}',[
+'middleware' => ['auth'],
+'as' => 'bug.deskripsi',
+'uses' => 'BugController@deskripsi'
+] );
+
+Route::get('/finish-debug/{id}',[
+'middleware' => ['auth'],
+'as' => 'bug.finish_debug',
+'uses' => 'BugController@finish_debug'
+] );
+
+
+
+Route::get('/still-has/{id}',[
+'middleware' => ['auth'],
+'as' => 'bug.still_has',
+'uses' => 'BugController@still_has'
+] );
+
+Route::get('/finish-testing/{id}',[
+'middleware' => ['auth'],
+'as' => 'bug.finish_testing',
+'uses' => 'BugController@finish_testing'
+] );
+
+
+
+
 
 
 });
