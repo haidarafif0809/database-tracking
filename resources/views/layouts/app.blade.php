@@ -56,6 +56,7 @@
                          <li><a href="{{ url('/bug/list') }}">Bug</a></li>
                          <li><a href="{{ url('/bug/aplikasi') }}">Aplikasi</a></li>
                         <li><a href="{{ url('/tracking/database') }}">Database</a></li>
+                          <li><a href="{{ url('/installer/install-aplikasi') }}">Install Aplikasi</a></li>
                          <li><a href="{{ url('/tracking/history') }}">History</a></li>
                    
                      

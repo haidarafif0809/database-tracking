@@ -15,6 +15,9 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+
+Route::get('/ssh','DatabaseController@ssh');
+
 Auth::routes();
 
 Route::get('/telegram', 'DatabaseController@telegram');
@@ -22,7 +25,9 @@ Route::get('/telegram', 'DatabaseController@telegram');
 Route::get('/home', 'HomeController@index');
 
 Route::get('/telegram', 'DatabaseController@telegram');
-
+Route::group(['prefix'=>'installer', 'middleware'=>['auth']], function () {
+Route::resource('install-aplikasi', 'InstallAplikasiController');
+});
 Route::group(['prefix'=>'bug', 'middleware'=>['auth']], function () {
 
 	Route::resource('aplikasi', 'AplikasiController');

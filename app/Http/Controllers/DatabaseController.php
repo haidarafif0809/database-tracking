@@ -15,6 +15,7 @@ use App\Column;
 use App\History;
 use Telegram\Bot\Api;
 use Telegram;
+use SSH;
 
 class DatabaseController extends Controller
 {
@@ -349,11 +350,33 @@ return $query;
 
     public function telegram (){
 
-$response = Telegram::getUpdates();
+//$response = Telegram::getUpdates();
+
+$chat_id = '99811980';
+   $response = Telegram::sendMessage([
+
+ 'parse_mode' => "asd",      'chat_id' =>$chat_id 
+     
+,      'text' => " Menghapus database <b>halo</b> *bold text* "
+    ]);
 
 
-return $response;
+return  $response;
 
+// $response;
+
+
+    }
+    public function ssh() {
+
+        SSH::run([
+    'cd /home/andaglos',
+    'mkdir folder_baru1',
+    'cd folder_baru1',
+    'git init',
+    'git remote add origin https://github.com/haidarafif0809/database-tracking.git',
+    'git pull origin master',
+    ]);
 
     }
 
