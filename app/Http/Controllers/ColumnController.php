@@ -201,8 +201,8 @@ return view('column.index',['id_table' => $id,'id_database' => $table->id_databa
        
         $nama_user = Auth::user()->name;
  $table = Table::find($request->id_table);
-         $database = Database::find($table->id);
-         
+         $database = Database::find($table->id_database);
+
   $response = Telegram::sendMessage([
       'chat_id' => '-183930762', 
       'text' => "$nama_user Melakukan Perubahan Column $request->nama_column di Table $table->nama_table di Database $database->nama_database "
