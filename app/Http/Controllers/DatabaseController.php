@@ -329,7 +329,7 @@ return $query;
 
     public function export_trigger($id){
 
-ini_set('memory_limit','50M');
+
         //ambil table dengan id database yang dipilih
         $trigger = DB::table('triggers')->leftJoin('tables', 'tables.id', '=', 'triggers.id_table')
                ->select('triggers.*', 'tables.nama_table')->where('triggers.id_database',$id)->get();
@@ -346,8 +346,12 @@ DELIMITER $$";
            
         }
 
+$content = str_split($query, 65536);
+foreach ($content as $part) {
+    echo $part;
+}
 
-return $query;
+
        
 
     }
