@@ -14,7 +14,10 @@
 <div class="panel-body">
 <p> <a class="btn btn-primary" href="{{ route('database.create') }}">Tambah</a> </p>
 
+<div class="table-responsive">
 {!! $html->table(['class'=>'table-striped table']) !!}
+
+</div>
 
 </div>
 </div>

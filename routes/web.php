@@ -21,6 +21,26 @@ Route::get('/database/backup',[
 'uses' => 'DatabaseController@backup_database'
 ] );
 
+Route::get('/database/upload-sample/{id}',[
+'middleware' => ['auth'],
+'as' => 'database.upload',
+'uses' => 'DatabaseController@upload_sample'
+] );
+
+Route::get('/sql/{id}',[
+'middleware' => ['auth'],
+'as' => 'database.download',
+'uses' => 'DatabaseController@download_sample'
+] );
+
+
+Route::post('/database/upload-sample',[
+'middleware' => ['auth'],
+'as' => 'database.upload-proses',
+'uses' => 'DatabaseController@upload_sample_store'
+] );
+
+
 Route::post('/database/backup',[
 'middleware' => ['auth'],
 'as' => 'backup.store',

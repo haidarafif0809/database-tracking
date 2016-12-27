@@ -17,6 +17,7 @@ class CreateDatabasesTable extends Migration
             $table->increments('id');
             $table->string('nama_database');
           $table->string('keterangan')->nullable();
+          $table->string('sample_data')->nullable();
             $table->date('tanggal');
             $table->integer('id_user');
             $table->timestamps();

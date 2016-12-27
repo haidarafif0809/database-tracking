@@ -43,6 +43,8 @@ class DatabaseController extends Controller
             'edit_url' => route('database.edit', $database->id),
             'table_url' => route('table.show', $database->id),
             'hapus_url' => route('database.destroy',$database->id),
+            'upload_sample_url' => route('database.upload',$database->id),
+            'download_sample_url' => route('database.download',$database->sample_data),
             'export_url' => route('database.export',$database->id),
              'export_trigger_url' => route('database.export-trigger',$database->id),
             'trigger_url' => route('trigger.show',$database->id),
@@ -440,7 +442,59 @@ public function create_backup(){
 }
 
 
-public function store_backup(){
+public function upload_sample($id){
+
+
+
+return view('database.upload',['id_database'=>$id]);
+
+}
+
+
+public function upload_sample_store(Request $request)
+    {
+        //
+
+          $this->validate($request, [
+        'sample_data' => 'required',
+        'id_database' => 'required',
+        ]);
+
+        if ($request->hasFile('sample_data')) {
+// Mengambil file yang diupload
+        $uploaded_cover = $request->file('sample_data');
+        // mengambil extension file
+        $extension = $uploaded_cover->getClientOriginalExtension();
+
+        if ($extension != 'sql') {
+            # code...
+
+        Session::flash("flash_notification", [
+    "level"=>"danger",
+    "message"=>"file yang di upload harus berexntensi sql"
+    ]);
+
+        return redirect()->back();
+
+        }
+        // membuat nama file random berikut extension
+        $filename = md5(time()) . '.' . $extension;
+        // menyimpan cover ke folder public/img
+        $destinationPath = public_path() . DIRECTORY_SEPARATOR . 'sql';
+        $uploaded_cover->move($destinationPath, $filename);
+        // mengisi field cover di book dengan filename yang baru dibuat
+        
+
+        Database::find($request->id_database)->update(['sample_data' => $filename]);
+
+            Session::flash("flash_notification", [
+    "level"=>"success",
+    "message"=>"Berhasil mengupload sample data"
+    ]);
+
+
+        return redirect('/tracking/database');
+    }
 
 }
 
