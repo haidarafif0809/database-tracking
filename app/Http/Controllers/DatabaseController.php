@@ -480,7 +480,7 @@ public function upload_sample_store(Request $request)
         // membuat nama file random berikut extension
         $filename = md5(time()) . '.' . $extension;
         // menyimpan cover ke folder public/img
-        $destinationPath = '/home/andaglos/public_html/database_tracking/sql';
+        $destinationPath = '/home/andaglos/public_html/database-tracking/sql';
         $uploaded_cover->move($destinationPath, $filename);
         // mengisi field cover di book dengan filename yang baru dibuat
         
