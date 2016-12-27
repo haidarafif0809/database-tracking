@@ -15,6 +15,31 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/database/backup',[
+'middleware' => ['auth'],
+'as' => 'database.backup',
+'uses' => 'DatabaseController@backup_database'
+] );
+
+Route::post('/database/backup',[
+'middleware' => ['auth'],
+'as' => 'backup.store',
+'uses' => 'DatabaseController@store_backup'
+] );
+
+
+Route::get('/database/isi-backup/{id}',[
+'middleware' => ['auth'],
+'as' => 'database.backup-isi',
+'uses' => 'DatabaseController@isi_backup'
+] );
+
+Route::get('/database/backup/create',[
+'middleware' => ['auth'],
+'as' => 'backup.create',
+'uses' => 'DatabaseController@create_backup'
+] );
+
 
 Route::get('/ssh','DatabaseController@ssh');
 

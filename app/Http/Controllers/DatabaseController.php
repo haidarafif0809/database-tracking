@@ -16,6 +16,7 @@ use App\History;
 use Telegram\Bot\Api;
 use Telegram;
 use SSH;
+use App\Backup;
 
 class DatabaseController extends Controller
 {
@@ -379,5 +380,69 @@ return  $response;
     ]);
 
     }
+
+
+    public function backup_database(Request $request, Builder $htmlBuilder)
+{
+    if ($request->ajax()) {
+
+
+      $backup = Backup::with('user');
+
+
+            return Datatables::of($backup)->addColumn('action', function($backup){
+                 $id_user = Auth::user()->id;
+            return view('database._action_backup', 
+            [
+            'isi_backup_url' => route('database.backup-isi', $backup->id),          
+            ]);
+            })->make(true);
+    }
+$html = $htmlBuilder
+->addColumn(['data' => 'user.name', 'name'=>'user.name', 'title'=>'User'])
+->addColumn(['data' => 'created_at', 'name'=>'created_at', 'title'=>'created_at'])
+->addColumn(['data' => 'action', 'name'=>'action', 'title'=>'', 'orderable'=>false, 'searchable'=>false]);
+return view('database.index_backup')->with(compact('html'));
+}
+
+public function isi_backup($id){
+
+
+    $backup = Backup::find($id);
+
+    return view ('database.isi_backup',['isi_backup' => $backup->isi_backup]);
+
+}
+
+public function create_backup(){
+
+
+
+     SSH::run([
+    'cd /home/andaglos/public_html/backup_database',
+    'php artisan backup:run',
+    
+    ] , function($line)
+{
+    $hasil =  $line.PHP_EOL;
+    $id_user = Auth::user()->id;
+
+        Session::flash("flash_notification", [
+    "level"=>"success",
+    "message"=>"Berhasil melakukan backup"
+    ]);
+
+    Backup::create(['user_id' => $id_user,'isi_backup' => $hasil ]);
+
+    return view ('database.create_backup',['hasil' => $hasil]);
+});
+  
+}
+
+
+public function store_backup(){
+
+}
+
 
 }

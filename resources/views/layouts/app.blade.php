@@ -58,6 +58,7 @@
                         <li><a href="{{ url('/tracking/database') }}">Database</a></li>
                           <li><a href="{{ url('/installer/install-aplikasi') }}">Install Aplikasi</a></li>
                          <li><a href="{{ url('/tracking/history') }}">History</a></li>
+                                <li><a href="{{ url('/database/backup') }}">Backup</a></li>
                    
                      
                         @endif
