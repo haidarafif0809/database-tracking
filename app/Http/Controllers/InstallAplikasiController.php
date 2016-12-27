@@ -72,7 +72,7 @@ return view('install.index')->with(compact('html'));
 
          $this->validate($request, [
         'nama_aplikasi' => 'required|unique:install_aplikasis,nama_aplikasi',
-        'lokasi_aplikasi' => 'required|unique:install_aplikasis,lokasi_aplikasi',
+        'lokasi_aplikasi' => 'required',
         'folder_aplikasi' => 'required|unique:install_aplikasis,folder_aplikasi',
         'alamat_git' => 'required|url'
         ]);
