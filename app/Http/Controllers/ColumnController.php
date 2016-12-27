@@ -202,9 +202,10 @@ return view('column.index',['id_table' => $id,'id_database' => $table->id_databa
         $nama_user = Auth::user()->name;
  $table = Table::find($request->id_table);
          $database = Database::find($table->id);
+         
   $response = Telegram::sendMessage([
       'chat_id' => '-183930762', 
-      'text' => "$nama_user Melakukan Perubahan Column $column->nama_column di Table $table->nama_table di Database $database->nama_database "
+      'text' => "$nama_user Melakukan Perubahan Column $request->nama_column di Table $table->nama_table di Database $database->nama_database "
     ]);
        
     return redirect("/tracking/column/$request->id_table");
