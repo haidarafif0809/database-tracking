@@ -93,12 +93,9 @@ return view('database.index')->with(compact('html'));
         $id_user = Auth::user()->id;
         $nama_user = Auth::user()->name;
 
-     $database = new  Database();
-     $database->nama_database = $request->nama_database;
-     $database->id_user = $id_user;
-     $database->tanggal = $tanggal;
-        $database->keterangan = $request->keterangan;
-     $database->save();
+
+     $database=  Database::create(['nama_database' => $request->nama_database ,'id_user' => $id_user ,'tanggal' => $tanggal
+        ,'keterangan' => $request->keterangan]);
 
      $history = new History();
      $history->id_user = $id_user;
@@ -119,6 +116,7 @@ return view('database.index')->with(compact('html'));
 
        
     return redirect('/tracking/database');
+    
     }
 
     /**

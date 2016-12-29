@@ -119,6 +119,7 @@ Route::get('/finish-testing/{id}',[
 
 });
 Route::group(['prefix'=>'tracking', 'middleware'=>['auth']], function () {
+	
 Route::resource('database', 'DatabaseController');
 
 Route::resource('table', 'TableController');
