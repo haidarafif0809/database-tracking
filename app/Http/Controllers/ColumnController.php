@@ -228,7 +228,8 @@ $column = Column::find($id);
 
            $nama_user = Auth::user()->name;
  $table = Table::find($column->id_table);
-         $database = Database::find($table->id);
+
+         $database = Database::find($table->id_database);
   $response = Telegram::sendMessage([
       'chat_id' => '-183930762', 
       'text' => "$nama_user Menghapus Column $column->nama_column di Table $table->nama_table di Database $database->nama_database "
