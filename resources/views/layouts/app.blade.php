@@ -11,15 +11,14 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Styles -->
- <!-- Styles -->
-    <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
+  <!-- Styles -->
+   
+    <link href="{{ asset('css/font-awesome.min.css') }}" rel='stylesheet' type='text/css'>
+<link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
+<link href="{{ asset('css/dataTables.bootstrap.css') }}" rel="stylesheet">
 
-  <link href="{{ asset('css/dataTables.bootstrap.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/font-awesome.min.css') }}" rel="stylesheet">
-     <link href="{{ asset('css/bootstrap-datepicker.standalone.min.css') }}" rel="stylesheet">
-       <link href="{{ asset('css/selectize.css') }}" rel="stylesheet">
-        <link href="{{ asset('css/selectize.bootstrap3.css') }}" rel="stylesheet">
-
+<link href="{{ asset('css/selectize.bootstrap3.css') }}" rel="stylesheet">
+<link href="{{ asset('css/bootstrap-datepicker.min.css') }}" rel="stylesheet">
 
     <!-- Scripts -->
     <script>
@@ -51,7 +50,7 @@
                 <div class="collapse navbar-collapse" id="app-navbar-collapse">
                     <!-- Left Side Of Navbar -->
                     <ul class="nav navbar-nav">
-                        @if (Auth::check())
+                         @if (Auth::check())
                         <li><a href="{{ url('/home') }}">Dashboard</a></li>
                          <li><a href="{{ url('/bug/list') }}">Bug</a></li>
                          <li><a href="{{ url('/bug/aplikasi') }}">Aplikasi</a></li>
@@ -96,22 +95,18 @@
             </div>
         </nav>
 
-        @include('layouts._flash')
-
-
         @yield('content')
     </div>
 
-
-
- <!-- Scripts -->
-    <script src="{{ asset('js/tether.min.js') }}"></script>
-    <script src="{{ asset('js/jquery-3.1.1.min.js') }}"></script>
-    <script src="{{ asset('js/bootstrap.min.js') }}"></script>
-        <script src="{{ asset('js/jquery.dataTables.js') }}"></script>
-          <script src="{{ asset('js/dataTables.bootstrap.js') }}"></script>
-             <script src="{{ asset('js/bootstrap-datepicker.min.js') }}"></script>
-                 <script src="{{ asset('js/selectize.min.js') }}"></script>
-    @yield('scripts')
+    <!-- Scripts -->
+     <!-- Scripts --><script src="{{ asset('js/jquery-3.1.1.min.js') }}"></script>
+<script src="{{ asset('js/tether.min.js') }}"></script>
+<script src="{{ asset('js/bootstrap.min.js') }}"></script>
+<script src="{{ asset('js/jquery.dataTables.js') }}"></script>
+<script src="{{ asset('js/dataTables.bootstrap.js') }}"></script>
+<script src="{{ asset('js/bootstrap-datepicker.min.js') }}"></script>
+<script src="{{ asset('js/selectize.min.js') }}"></script>
+<script src="{{ asset('js/custom.js') }}"></script>
+@yield('scripts')
 </body>
 </html>

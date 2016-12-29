@@ -1,5 +1,5 @@
 <div class="form-group {!! $errors->has('aplikasi_id') ? 'has-error' : '' !!}">
-{!! Form::label('aplikasi_id', 'Table', ['class'=>'col-md-2 control-label']) !!}
+{!! Form::label('aplikasi_id', 'Aplikasi', ['class'=>'col-md-2 control-label']) !!}
 <div class="col-md-4">
 {!! Form::select('aplikasi_id',$aplikasi, null,  array('class' => 'form-control')) !!}
 

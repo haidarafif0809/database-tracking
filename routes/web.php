@@ -181,3 +181,7 @@ Route::get('/trigger/isi/{id}',[
 
 
 });
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index');
