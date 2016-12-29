@@ -39,7 +39,7 @@ class BugController extends Controller
 
             return view('bug._action', 
             [
-            'finish_debug_url' => route('bug.finish_debug', $bug->id),
+          
              'still_has_url' => route('bug.still_has', $bug->id),
             'deskripsi_url' => route('bug.deskripsi', $bug->id),
              'finish_testing_url' => route('bug.finish_testing', $bug->id),
