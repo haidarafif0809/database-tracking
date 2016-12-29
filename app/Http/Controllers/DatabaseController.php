@@ -60,6 +60,7 @@ $html = $htmlBuilder
 ->addColumn(['data' => 'tanggal', 'name'=>'tanggal', 'title'=>'Tanggal'])
 ->addColumn(['data' => 'action', 'name'=>'action', 'title'=>'', 'orderable'=>false, 'searchable'=>false]);
 return view('database.index')->with(compact('html'));
+
 }
 
 
@@ -85,8 +86,9 @@ return view('database.index')->with(compact('html'));
         //
 
           $this->validate($request, [
-        'nama_database' => 'required|unique:databases',
+        'nama_database' => 'required|unique:databases,nama_database',
         ]);
+
         $tanggal = date('Y-m-d');
         $id_user = Auth::user()->id;
         $nama_user = Auth::user()->name;

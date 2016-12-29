@@ -8,5 +8,5 @@ class Database extends Model
 {
     //
 
-    protected $fillable  = ['sample_data'];
+    protected $fillable  = ['sample_data','nama_database','keterangan','tanggal','id_user'];
 }
