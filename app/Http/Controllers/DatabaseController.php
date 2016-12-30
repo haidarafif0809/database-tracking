@@ -283,11 +283,15 @@ $query = "";
                 }
 
                 //status null 
-
-                 if ($columns->status_null == 1 AND $columns->status_increment == 0) {
+if($columns->status_null == 1 AND $columns->tipe_data == 'timestamp' )
+                {
+                     $query .= " NULL DEFAULT NULL";
+                }
+                 elseif ($columns->status_null == 1 AND $columns->status_increment == 0) {
                     # code...
                     $query .= " DEFAULT NULL";
                 }
+
                 elseif($columns->status_null == 0 AND $columns->status_increment == 0) {
                      $query .= " NOT NULL";
                      if ($columns->default != "") {
