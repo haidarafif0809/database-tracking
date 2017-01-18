@@ -19,6 +19,7 @@ use Telegram;
 use App\Bug;
 use App\Aplikasi;
 use App\Komentar;
+use App\User;
 class BugController extends Controller
 {
     /**
