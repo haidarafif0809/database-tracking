@@ -69,12 +69,19 @@ class BugController extends Controller
                      $status_bug = "Finish Testing";
                 }
                 return $status_bug;
+            })->addColumn('debugger',function($bug){
+
+                    $debugger = User::find($bug->debugger);
+
+                    return $debugger->name;
+
             })->make(true);
     }
 $html = $htmlBuilder
 ->addColumn(['data' => 'judul', 'name'=>'judul', 'title'=>'Judul bug'])
 ->addColumn(['data' => 'aplikasi.nama_aplikasi', 'name'=>'aplikasi.nama_aplikasi', 'title'=>'Aplikasi'])
 ->addColumn(['data' => 'user.name', 'name'=>'user.name', 'title'=>'Pelapor'])
+->addColumn(['data' => 'debugger', 'name'=>'debugger', 'title'=>'Debugger'])
 ->addColumn(['data' => 'status_bug_aplikasi', 'name'=>'status_bug_aplikasi', 'title'=>'Status'])
 ->addColumn(['data' => 'created_at', 'name'=>'created_at', 'title'=>'created_at'])
 ->addColumn(['data' => 'updated_at', 'name'=>'updated_at', 'title'=>'updated_at'])
