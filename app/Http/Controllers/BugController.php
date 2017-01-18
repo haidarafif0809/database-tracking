@@ -31,7 +31,7 @@ class BugController extends Controller
     if ($request->ajax()) {
 
 
-      $bug = Bug::with(['aplikasi','user'])->orderBy('created_at','desc');
+      $bug = Bug::with(['aplikasi','user'])->where('status_bug','!=','3')->orderBy('created_at','desc');
 
 
             return Datatables::of($bug)->addColumn('action', function($bug){
