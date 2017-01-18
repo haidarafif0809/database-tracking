@@ -132,21 +132,35 @@ $aplikasi = Aplikasi::find($request->aplikasi_id);
     public function on_hold($id){
         $id_user = Auth::user()->id;
         $bug = Bug::find($id);
-        $bug->status_bug = 1;
-        $bug->debugger =   $id_user;
-        $bug->save();
-          $name = Auth::user()->name;
 
-        $chat_id = '-188078178';
 
-           $response= Telegram::sendMessage([
-      'chat_id' =>   $chat_id, 
-      'text' => "$name mengubah status aduan \n $bug->judul menjadi On-Hold  "]);
+        if ($bug->status_bug == 1) {
 
-         Session::flash("flash_notification", [
-    "level"=>"success",
-    "message"=>"Berhasil Mengubah status bug menjadi on-hold"
-    ]);
+              Session::flash("flash_notification", [
+            "level"=>"success",
+            "message"=>"Status Aduan Sedang di Kerjakan Oleh Orang Lain"
+            ]);
+
+        }
+        else {
+                 $bug->status_bug = 1;
+            $bug->debugger =   $id_user;
+            $bug->save();
+              $name = Auth::user()->name;
+
+            $chat_id = '-188078178';
+
+               $response= Telegram::sendMessage([
+          'chat_id' =>   $chat_id, 
+          'text' => "$name mengubah status aduan \n $bug->judul menjadi On-Hold  "]);
+
+             Session::flash("flash_notification", [
+        "level"=>"success",
+        "message"=>"Berhasil Mengubah status bug menjadi on-hold"
+        ]);
+
+        }
+       
 
              return redirect("/bug/list");
 
