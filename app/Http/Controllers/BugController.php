@@ -82,8 +82,9 @@ $html = $htmlBuilder
 ->addColumn(['data' => 'action', 'name'=>'action', 'title'=>'', 'orderable'=>false, 'searchable'=>false]); 
 
 $aplikasi = Aplikasi::all();
+$user = User::all();
 
-return view('bug.index',['aplikasi' => $aplikasi ])->with(compact('html'));
+return view('bug.index',['aplikasi' => $aplikasi ,'user' => $user ])->with(compact('html'));
 }
 
 
@@ -142,10 +143,73 @@ $html = $htmlBuilder
 ->addColumn(['data' => 'action', 'name'=>'action', 'title'=>'', 'orderable'=>false, 'searchable'=>false]); 
 
 $aplikasi = Aplikasi::all();
+$user = User::all();
 
-return view('bug.index',['aplikasi' => $aplikasi ])->with(compact('html'));
+return view('bug.index',['aplikasi' => $aplikasi,'user' => $user ])->with(compact('html'));
 
 }
+
+public function pelapor_bug(Request $request, Builder $htmlBuilder,$id){
+
+       if ($request->ajax()) {
+
+
+      $bug = Bug::with(['aplikasi','user'])->where('pengadu','=',$id)->orderBy('created_at','desc');
+
+
+            return Datatables::of($bug)->addColumn('action', function($bug){
+                 $id_user = Auth::user()->id;
+
+            return view('bug._action', 
+            [
+            'finish_debug_url' => route('bug.finish_debug', $bug->id),
+             'still_has_url' => route('bug.still_has', $bug->id),
+            'deskripsi_url' => route('bug.deskripsi', $bug->id),
+             'finish_testing_url' => route('bug.finish_testing', $bug->id),
+
+            'on_hold_url' => route('bug.onhold', $bug->id),
+            'edit_url' => route('list.edit', $bug->id),
+            'hapus_url' => route('list.destroy',$bug->id),   
+            'id_user' => $id_user,       
+            'model' => $bug,]);
+            })->addColumn('status_bug_aplikasi',function($bug){
+                $status_bug = "";
+                if ($bug->status_bug == 0 ) {
+                    # code...
+                    $status_bug = "Not On-Hold / Still has Bugs";
+
+                }
+                elseif ($bug->status_bug == 1) {
+                    # code...
+                     $status_bug = " On-Hold";
+                }
+                elseif ($bug->status_bug == 2) {
+                    # code...
+                     $status_bug = "Finish Debug";
+                }
+                 elseif ($bug->status_bug == 3) {
+                    # code...
+                     $status_bug = "Finish Testing";
+                }
+                return $status_bug;
+            })->make(true);
+    }
+$html = $htmlBuilder
+->addColumn(['data' => 'judul', 'name'=>'judul', 'title'=>'Judul bug'])
+->addColumn(['data' => 'aplikasi.nama_aplikasi', 'name'=>'aplikasi.nama_aplikasi', 'title'=>'Aplikasi'])
+->addColumn(['data' => 'user.name', 'name'=>'user.name', 'title'=>'Pelapor'])
+->addColumn(['data' => 'status_bug_aplikasi', 'name'=>'status_bug_aplikasi', 'title'=>'Status'])
+->addColumn(['data' => 'created_at', 'name'=>'created_at', 'title'=>'created_at'])
+->addColumn(['data' => 'updated_at', 'name'=>'updated_at', 'title'=>'updated_at'])
+->addColumn(['data' => 'action', 'name'=>'action', 'title'=>'', 'orderable'=>false, 'searchable'=>false]); 
+
+$aplikasi = Aplikasi::all();
+$user = User::all();
+
+return view('bug.index',['aplikasi' => $aplikasi ,'user' => $user])->with(compact('html'));
+
+}
+
 
 public function aplikasi_bug(Request $request, Builder $htmlBuilder,$id){
 
@@ -202,8 +266,9 @@ $html = $htmlBuilder
 ->addColumn(['data' => 'action', 'name'=>'action', 'title'=>'', 'orderable'=>false, 'searchable'=>false]); 
 
 $aplikasi = Aplikasi::all();
+$user = User::all();
 
-return view('bug.index',['aplikasi' => $aplikasi ])->with(compact('html'));
+return view('bug.index',['aplikasi' => $aplikasi,'user' => $user ])->with(compact('html'));
 
 }
 

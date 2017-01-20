@@ -47,6 +47,13 @@ Route::get('/bug/aplikasi/{id}',[
 'uses' => 'BugController@aplikasi_bug'
 ] );
 
+Route::get('/bug/pelapor/{id}',[
+'middleware' => ['auth'],
+'as' => 'bug.pelapor',
+'uses' => 'BugController@pelapor_bug'
+] );
+
+
 
 Route::post('/database/upload-sample',[
 'middleware' => ['auth'],

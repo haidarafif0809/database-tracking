@@ -42,6 +42,19 @@
 </div>
 
 
+<div class="btn-group">
+  <button type="button" class="btn btn-primary">Pelapor</button>
+  <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+    <span class="caret"></span>
+  </button>
+  <ul class="dropdown-menu" role="menu">
+  @foreach($user as $users)
+    <li><a href="{{ route('bug.pelapor',$users->id) }}">{{ $users->name }}</a></li>
+@endforeach
+  </ul>
+</div>
+
+
 <br>
 <br>
 
