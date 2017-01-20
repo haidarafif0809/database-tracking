@@ -76,7 +76,7 @@ $html = $htmlBuilder
 ->addColumn(['data' => 'judul', 'name'=>'judul', 'title'=>'Judul bug'])
 ->addColumn(['data' => 'aplikasi.nama_aplikasi', 'name'=>'aplikasi.nama_aplikasi', 'title'=>'Aplikasi'])
 ->addColumn(['data' => 'user.name', 'name'=>'user.name', 'title'=>'Pelapor'])
-->addColumn(['data' => 'status_bug_aplikasi', 'name'=>'status_bug_aplikasi', 'title'=>'Status'])
+->addColumn(['data' => 'status_bug_aplikasi', 'name'=>'status_bug_aplikasi', 'title'=>'Status' , 'searchable'=>false])
 ->addColumn(['data' => 'created_at', 'name'=>'created_at', 'title'=>'created_at'])
 ->addColumn(['data' => 'updated_at', 'name'=>'updated_at', 'title'=>'updated_at'])
 ->addColumn(['data' => 'action', 'name'=>'action', 'title'=>'', 'orderable'=>false, 'searchable'=>false]); 
@@ -137,7 +137,7 @@ $html = $htmlBuilder
 ->addColumn(['data' => 'judul', 'name'=>'judul', 'title'=>'Judul bug'])
 ->addColumn(['data' => 'aplikasi.nama_aplikasi', 'name'=>'aplikasi.nama_aplikasi', 'title'=>'Aplikasi'])
 ->addColumn(['data' => 'user.name', 'name'=>'user.name', 'title'=>'Pelapor'])
-->addColumn(['data' => 'status_bug_aplikasi', 'name'=>'status_bug_aplikasi', 'title'=>'Status'])
+->addColumn(['data' => 'status_bug_aplikasi', 'name'=>'status_bug_aplikasi', 'title'=>'Status', 'searchable'=>false])
 ->addColumn(['data' => 'created_at', 'name'=>'created_at', 'title'=>'created_at'])
 ->addColumn(['data' => 'updated_at', 'name'=>'updated_at', 'title'=>'updated_at'])
 ->addColumn(['data' => 'action', 'name'=>'action', 'title'=>'', 'orderable'=>false, 'searchable'=>false]); 
@@ -198,7 +198,7 @@ $html = $htmlBuilder
 ->addColumn(['data' => 'judul', 'name'=>'judul', 'title'=>'Judul bug'])
 ->addColumn(['data' => 'aplikasi.nama_aplikasi', 'name'=>'aplikasi.nama_aplikasi', 'title'=>'Aplikasi'])
 ->addColumn(['data' => 'user.name', 'name'=>'user.name', 'title'=>'Pelapor'])
-->addColumn(['data' => 'status_bug_aplikasi', 'name'=>'status_bug_aplikasi', 'title'=>'Status'])
+->addColumn(['data' => 'status_bug_aplikasi', 'name'=>'status_bug_aplikasi', 'title'=>'Status' , 'searchable'=>false])
 ->addColumn(['data' => 'created_at', 'name'=>'created_at', 'title'=>'created_at'])
 ->addColumn(['data' => 'updated_at', 'name'=>'updated_at', 'title'=>'updated_at'])
 ->addColumn(['data' => 'action', 'name'=>'action', 'title'=>'', 'orderable'=>false, 'searchable'=>false]); 
@@ -260,7 +260,7 @@ $html = $htmlBuilder
 ->addColumn(['data' => 'judul', 'name'=>'judul', 'title'=>'Judul bug'])
 ->addColumn(['data' => 'aplikasi.nama_aplikasi', 'name'=>'aplikasi.nama_aplikasi', 'title'=>'Aplikasi'])
 ->addColumn(['data' => 'user.name', 'name'=>'user.name', 'title'=>'Pelapor'])
-->addColumn(['data' => 'status_bug_aplikasi', 'name'=>'status_bug_aplikasi', 'title'=>'Status'])
+->addColumn(['data' => 'status_bug_aplikasi', 'name'=>'status_bug_aplikasi', 'title'=>'Status' , 'searchable'=>false])
 ->addColumn(['data' => 'created_at', 'name'=>'created_at', 'title'=>'created_at'])
 ->addColumn(['data' => 'updated_at', 'name'=>'updated_at', 'title'=>'updated_at'])
 ->addColumn(['data' => 'action', 'name'=>'action', 'title'=>'', 'orderable'=>false, 'searchable'=>false]); 
