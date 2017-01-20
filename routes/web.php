@@ -34,6 +34,20 @@ Route::get('/sql/{id}',[
 ] );
 
 
+Route::get('/bug/status/{id}',[
+'middleware' => ['auth'],
+'as' => 'bug.status',
+'uses' => 'BugController@status_bug'
+] );
+
+
+Route::get('/bug/aplikasi/{id}',[
+'middleware' => ['auth'],
+'as' => 'bug.aplikasi',
+'uses' => 'BugController@aplikasi_bug'
+] );
+
+
 Route::post('/database/upload-sample',[
 'middleware' => ['auth'],
 'as' => 'database.upload-proses',

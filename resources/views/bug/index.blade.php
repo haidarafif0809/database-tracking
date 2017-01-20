@@ -12,7 +12,38 @@
 <h2 class="panel-title">Bug</h2>
 </div>
 <div class="panel-body">
-<p> <a class="btn btn-primary" href="{{ route('list.create') }}">Tambah</a> </p>
+<a class="btn btn-primary" href="{{ route('list.create') }}">Tambah</a> 
+
+
+ <div class="btn-group">
+  <button type="button" class="btn btn-primary">Status Bug</button>
+  <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+    <span class="caret"></span>
+  </button>
+  <ul class="dropdown-menu" role="menu">
+    <li><a href="{{ url('/bug/list') }}">All</a></li>
+    <li><a href="{{ route('bug.status',0) }}">Not On-Hold / Still has Bugs</a></li>
+    <li><a href="{{ route('bug.status',1) }}">On-Hold</a></li>
+     <li><a href="{{ route('bug.status',2) }}">Finisih Debug</a></li>
+      <li><a href="{{ route('bug.status',3) }}">Finish Testing</a></li>
+  </ul>
+</div>
+
+<div class="btn-group">
+  <button type="button" class="btn btn-primary">Aplikasi</button>
+  <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+    <span class="caret"></span>
+  </button>
+  <ul class="dropdown-menu" role="menu">
+  @foreach($aplikasi as $aplikasis)
+    <li><a href="{{ route('bug.aplikasi',$aplikasis->id) }}">{{ $aplikasis->nama_aplikasi }}</a></li>
+@endforeach
+  </ul>
+</div>
+
+
+<br>
+<br>
 
 {!! $html->table(['class'=>'table-striped table']) !!}
 
