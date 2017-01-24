@@ -41,7 +41,7 @@ Route::get('/bug/status/{id}',[
 ] );
 
 
-Route::get('/bug/aplikasi/{id}',[
+Route::get('/bug/aplikasi_bug/{id}',[
 'middleware' => ['auth'],
 'as' => 'bug.aplikasi',
 'uses' => 'BugController@aplikasi_bug'

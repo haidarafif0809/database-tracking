@@ -73,7 +73,7 @@ class BugController extends Controller
             })->make(true);
     }
 $html = $htmlBuilder
-->addColumn(['data' => 'judul', 'name'=>'judul', 'title'=>'Judul bug'])
+->addColumn(['data' => 'judul', 'name'=>'judul', 'title'=>'Judul bug & Request'])
 ->addColumn(['data' => 'aplikasi.nama_aplikasi', 'name'=>'aplikasi.nama_aplikasi', 'title'=>'Aplikasi'])
 ->addColumn(['data' => 'user.name', 'name'=>'user.name', 'title'=>'Pelapor'])
 ->addColumn(['data' => 'status_bug_aplikasi', 'name'=>'status_bug_aplikasi', 'title'=>'Status' , 'searchable'=>false])
@@ -134,7 +134,7 @@ public function status_bug(Request $request, Builder $htmlBuilder,$id){
             })->make(true);
     }
 $html = $htmlBuilder
-->addColumn(['data' => 'judul', 'name'=>'judul', 'title'=>'Judul bug'])
+->addColumn(['data' => 'judul', 'name'=>'judul', 'title'=>'Judul bug & Request'])
 ->addColumn(['data' => 'aplikasi.nama_aplikasi', 'name'=>'aplikasi.nama_aplikasi', 'title'=>'Aplikasi'])
 ->addColumn(['data' => 'user.name', 'name'=>'user.name', 'title'=>'Pelapor'])
 ->addColumn(['data' => 'status_bug_aplikasi', 'name'=>'status_bug_aplikasi', 'title'=>'Status', 'searchable'=>false])
@@ -195,7 +195,7 @@ public function pelapor_bug(Request $request, Builder $htmlBuilder,$id){
             })->make(true);
     }
 $html = $htmlBuilder
-->addColumn(['data' => 'judul', 'name'=>'judul', 'title'=>'Judul bug'])
+->addColumn(['data' => 'judul', 'name'=>'judul', 'title'=>'Judul bug & Request'])
 ->addColumn(['data' => 'aplikasi.nama_aplikasi', 'name'=>'aplikasi.nama_aplikasi', 'title'=>'Aplikasi'])
 ->addColumn(['data' => 'user.name', 'name'=>'user.name', 'title'=>'Pelapor'])
 ->addColumn(['data' => 'status_bug_aplikasi', 'name'=>'status_bug_aplikasi', 'title'=>'Status' , 'searchable'=>false])
@@ -257,7 +257,7 @@ public function aplikasi_bug(Request $request, Builder $htmlBuilder,$id){
             })->make(true);
     }
 $html = $htmlBuilder
-->addColumn(['data' => 'judul', 'name'=>'judul', 'title'=>'Judul bug'])
+->addColumn(['data' => 'judul', 'name'=>'judul', 'title'=>'Judul bug & Request'])
 ->addColumn(['data' => 'aplikasi.nama_aplikasi', 'name'=>'aplikasi.nama_aplikasi', 'title'=>'Aplikasi'])
 ->addColumn(['data' => 'user.name', 'name'=>'user.name', 'title'=>'Pelapor'])
 ->addColumn(['data' => 'status_bug_aplikasi', 'name'=>'status_bug_aplikasi', 'title'=>'Status' , 'searchable'=>false])

@@ -9,14 +9,14 @@
 </ul>
 <div class="panel panel-default">
 <div class="panel-heading">
-<h2 class="panel-title">Bug</h2>
+<h2 class="panel-title">Bug & Request</h2>
 </div>
 <div class="panel-body">
 <a class="btn btn-primary" href="{{ route('list.create') }}">Tambah</a> 
 
 
  <div class="btn-group">
-  <button type="button" class="btn btn-primary">Status Bug</button>
+  <button type="button" class="btn btn-primary">Status Bug & Request</button>
   <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
     <span class="caret"></span>
   </button>
