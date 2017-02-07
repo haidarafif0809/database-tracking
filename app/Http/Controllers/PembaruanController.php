@@ -13,6 +13,7 @@ use Auth;
 use App\Detail;
 use Telegram\Bot\Api;
 use Telegram;
+use App\Aplikasi;
 
 class PembaruanController extends Controller
 {
@@ -79,6 +80,7 @@ class PembaruanController extends Controller
 
   $id_user = Auth::user()->id;
   $name = Auth::user()->name;
+$aplikasi = Aplikasi::find($request->id_aplikasi);
          $pembaruans = Pembaruan::create(['id_user'=>$id_user,
             'id_aplikasi' => $request->id_aplikasi,
             'judul' => $request->judul,
@@ -103,8 +105,13 @@ if ($request->hasFile('foto')) {
 
                $response= Telegram::sendMessage([
           'chat_id' =>   env('CHAT_ID_PEMBARUAN'), 
-          'text' => "$name Menambahkan Pembaruan $pembaruans->judul "]);
+          'text' => "$name Menambahkan Pembaruan $pembaruans->judul, Nama Aplikasi $aplikasi->nama_aplikasi, Pemasalahan : $pembaruans->pemecahan, Pemecahan : $pembaruans->pemasalahan"]);
 
+            $response = Telegram::sendPhoto([
+              'chat_id' => env('CHAT_ID_PEMBARUAN'), 
+              'photo' => "foto/$pembaruans->foto"
+            ]);
+$messageId = $response->getMessageId();
 
         Session::flash("flash_notification",[
             "level"=>"success",
@@ -162,6 +169,7 @@ if ($request->hasFile('foto')) {
 
           $id_user = Auth::user()->id;
           $name = Auth::user()->name;
+$aplikasi = Aplikasi::find($request->id_aplikasi);
 
           $pembaruan = Pembaruan::find($id);
           $pembaruan->update(['id_user'=>$id_user,'id_aplikasi' => $request->id_aplikasi,'judul' => $request->judul,'pemasalahan' => $request->pemasalahan,'pemecahan' => $request->pemecahan,$request->except('foto') ]);
@@ -192,10 +200,15 @@ if ($request->hasFile('foto')) {
             $pembaruan->save();
 
           }
-
-        $response= Telegram::sendMessage([
+              $response= Telegram::sendMessage([
           'chat_id' =>   env('CHAT_ID_PEMBARUAN'), 
-          'text' => "$name Mengubah Pembaruan $pembaruan->judul "]);
+          'text' => "$name Mengubah Pembaruan $pembaruan->judul, Nama Aplikasi $aplikasi->nama_aplikasi, Pemasalahan : $pembaruan->pemecahan, Pemecahan : $pembaruan->pemasalahan"]);
+
+            $response = Telegram::sendPhoto([
+              'chat_id' => env('CHAT_ID_PEMBARUAN'), 
+              'photo' => "foto/$pembaruan->foto"
+            ]);
+$messageId = $response->getMessageId();
 
         Session::flash("flash_notification",[
             "level"=>"success",
@@ -214,6 +227,7 @@ if ($request->hasFile('foto')) {
     {
         //
         $pembaruan = Pembaruan::find($id);
+            $judul = $pembaruan->judul;
 
         if ($pembaruan->foto) {
             $old_foto = $pembaruan->foto;
@@ -231,7 +245,7 @@ if ($request->hasFile('foto')) {
  $name = Auth::user()->name;
           $response= Telegram::sendMessage([
           'chat_id' =>   env('CHAT_ID_PEMBARUAN'), 
-          'text' => "$name Menghapus Pembaruan"]);
+          'text' => "$name Menghapus Pembaruan $judul"]);
 
         Session::flash("flash_notification", [
             "level"=>"success",
