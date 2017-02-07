@@ -113,6 +113,7 @@ Route::get('/deskripsi/{id}',[
 'uses' => 'BugController@deskripsi'
 ] );
 
+
 Route::get('/finish-debug/{id}',[
 'middleware' => ['auth'],
 'as' => 'bug.finish_debug',
@@ -144,8 +145,8 @@ Route::group(['prefix'=>'tracking', 'middleware'=>['auth']], function () {
 Route::resource('database', 'DatabaseController');
 
 Route::resource('table', 'TableController');
-Route::resource('column', 'ColumnController');
 
+Route::resource('column', 'ColumnController');
 
 Route::resource('trigger', 'TriggerController');
 
@@ -153,8 +154,19 @@ Route::get('/table/create/{id}', 'TableController@create');
 
 Route::get('/column/create/{id}', 'ColumnController@create');
 
-
 Route::get('/trigger/create/{id}', 'TriggerController@create');
+
+Route::resource('pembaruan', 'PembaruanController');
+
+Route::resource('detail', 'DetailController');
+ 
+Route::get('/komentar/{id}',[
+'middleware' => ['auth'],
+'as' => 'pembaruan.komentar',
+'uses' => 'PembaruanController@komentar'
+] );
+
+
 
 Route::get('/history',[
 'middleware' => ['auth'],

@@ -63,7 +63,7 @@ $name = Auth::user()->name;
     "level"=>"success",
     "message"=>"Berhasil Membuat Komentar di Bug $bug->judul"
     ]);
-        $chat_id = '-188078178';
+        $chat_id = '242162284';
   $response= Telegram::sendMessage([
       'chat_id' =>   $chat_id, 
       'text' => "$name Berkomentar di bug $bug->judul \n $request->komentar   "

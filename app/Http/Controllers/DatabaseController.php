@@ -104,7 +104,7 @@ return view('database.index')->with(compact('html'));
      $history->save();
 
      $response = Telegram::sendMessage([
-      'chat_id' => '-183930762', 
+      'chat_id' => '242162284', 
       'text' => "$nama_user Membuat database $request->nama_database "
     ]);
 
@@ -229,7 +229,7 @@ return view('history.index')->with(compact('html'));
     "message"=>"Berhasil menghapus database $database->nama_database"
     ]);
       $response = Telegram::sendMessage([
-      'chat_id' => '-183930762', 
+      'chat_id' => '242162284', 
       'text' => "$nama_user Menghapus database $database->nama_database "
     ]);
 
@@ -364,7 +364,7 @@ foreach ($content as $part) {
 
 //$response = Telegram::getUpdates();
 
-$chat_id = '99811980';
+$chat_id = '242162284';
    $response = Telegram::sendMessage([
 
  'parse_mode' => "asd",      'chat_id' =>$chat_id 
