@@ -13,6 +13,8 @@ use File;
 use Telegram\Bot\Api;
 use Telegram;
 use App\Tugas;
+use DateTime;
+
 
 class TugasController extends Controller
 {
@@ -33,8 +35,7 @@ class TugasController extends Controller
                  $id_user = Auth::user()->id;
 
             return view('tugas._action', 
-            [ 
-             'belum_url' => route('tugas.belum', $tugas->id),  
+            [    
 
             'proses_url' => route('tugas.proses', $tugas->id),
             'selesai_url' => route('tugas.selesai', $tugas->id),
@@ -51,7 +52,7 @@ class TugasController extends Controller
                 }
                 elseif ($tugas->status_tugas == 1) {
                     # code...
-                     $status_tugas = " Sedang Di Proses";
+                     $status_tugas = " Sedang Di Kerjakan";
                 }
                 elseif ($tugas->status_tugas == 2) {
                     # code...
@@ -218,6 +219,56 @@ if ($request->hasFile('foto_tugas')) {
         return redirect()->route('data.index');
     }
 
+
+    public function proses($id){
+        $id_user = Auth::user()->id;
+
+        $tugas = Tugas::find($id);
+
+ 
+                 $tugas->status_tugas = 1;
+            $tugas->save();
+              $name = Auth::user()->name;
+
+
+            $chat_id = '242162284';
+               $response= Telegram::sendMessage([
+          'chat_id' =>   $chat_id, 
+          'text' => "$name mengubah status aduan \n $tugas->judul menjadi On-Hold  "]);
+
+
+             Session::flash("flash_notification", [
+        "level"=>"success",
+        "message"=>"Berhasil Mengubah status tugas menjadi on-hold"
+        ]);
+ 
+        return redirect()->route('data.index');
+    }
+
+
+    public function selesai($id){
+        $id_user = Auth::user()->id;
+
+        $tugas = Tugas::find($id);
+            $now = new DateTime();
+                 $tugas->status_tugas = 2;
+                 $tugas->waktu_selesai = $now;
+            $tugas->save();
+              $name = Auth::user()->name;
+
+            $chat_id = '242162284';
+
+               $response= Telegram::sendMessage([
+          'chat_id' =>   $chat_id, 
+          'text' => "$name mengubah status aduan \n $tugas->judul menjadi On-Hold  "]);
+
+             Session::flash("flash_notification", [
+        "level"=>"success",
+        "message"=>"Berhasil Mengubah status tugas menjadi on-hold"
+        ]);
+ 
+        return redirect()->route('data.index');
+    }
     /**
      * Remove the specified resource from storage.
      *

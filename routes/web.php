@@ -140,11 +140,6 @@ Route::group(['prefix'=>'tugas', 'middleware'=>['auth']], function () {
 
 Route::resource('data', 'TugasController');
 
-Route::get('/belum/{id}',[
-'middleware' => ['auth'],
-'as' => 'tugas.belum',
-'uses' => 'TugasController@belum'
-] );
 
 Route::get('/proses/{id}',[
 'middleware' => ['auth'],
