@@ -81,7 +81,62 @@ $html = $htmlBuilder
          return view('tugas.index')->with(compact('html')); 
 }
 
+  public function status_tugas(Request $request, Builder $htmlBuilder,$id)
+{
+    if ($request->ajax()) {
 
+
+     $tugas = Tugas::with(['user'])->where('status_tugas','=',$id)->orderBy('created_at','desc');
+
+            return Datatables::of($tugas)->addColumn('action', function($tugas){
+                 $id_user = Auth::user()->id;
+
+            return view('tugas._action', 
+            [    
+
+            'komentar_url' => route('tugas.komentar',$tugas->id), 
+            'proses_url' => route('tugas.proses', $tugas->id),
+            'selesai_url' => route('tugas.selesai', $tugas->id),
+            'belum_url' => route('tugas.belum', $tugas->id),
+            'konfirmasi_url' => route('tugas.konfirmasi', $tugas->id),
+            'edit_url' => route('data.edit', $tugas->id),
+            'hapus_url' => route('data.destroy',$tugas->id),   
+            'id_user' => $id_user,       
+            'model' => $tugas,]);
+            })->addColumn('status_tugas',function($tugas){
+                $status_tugas = "status_tugas";
+                if ($tugas->status_tugas == 0 ) {
+                    # code...
+                    $status_tugas = "Belum Di Kerjakan";
+
+                }
+                elseif ($tugas->status_tugas == 1) {
+                    # code...
+                     $status_tugas = " Sedang Di Kerjakan";
+                }
+                elseif ($tugas->status_tugas == 2) {
+                    # code...
+                     $status_tugas = "Belum Di Konfirmasi";
+                }
+                elseif ($tugas->status_tugas == 3) {
+                    # code...
+                     $status_tugas = "Sudah Di Konfirmasi/Sudah Selesai";
+                } 
+                return $status_tugas;
+            })->make(true);
+    }
+$html = $htmlBuilder
+->addColumn(['data' => 'judul', 'name'=>'judul', 'title'=>'Judul'])
+->addColumn(['data' => 'user.name', 'name'=>'user.name', 'title'=>'Petugas'])
+->addColumn(['data' => 'status_tugas', 'name'=>'status_tugas', 'title'=>'Status' , 'searchable'=>false])
+->addColumn(['data' => 'deadline', 'name'=>'deadline', 'title'=>'deadline'])
+->addColumn(['data' => 'waktu_selesai', 'name'=>'waktu_selesai', 'title'=>'Waktu Selesai'])
+->addColumn(['data' => 'waktu_konfirmasi', 'name'=>'waktu_konfirmasi', 'title'=>'Waktu Konfirmasi'])
+->addColumn(['data' => 'action', 'name'=>'action', 'title'=>'', 'orderable'=>false, 'searchable'=>false]); 
+  
+
+         return view('tugas.index')->with(compact('html')); 
+}
 
     /**
      * Show the form for creating a new resource.

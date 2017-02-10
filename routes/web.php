@@ -166,6 +166,12 @@ Route::get('/belum/{id}',[
 'uses' => 'TugasController@belum'
 ] );
 
+Route::get('/data/status/{id}',[
+'middleware' => ['auth'],
+'as' => 'tugas.status',
+'uses' => 'TugasController@status_tugas'
+] );
+
 Route::get('/komentar/{id}',[
 'middleware' => ['auth'],
 'as' => 'tugas.komentar',

@@ -17,9 +17,10 @@ class CreateTugasTable extends Migration
             $table->increments('id');
             $table->integer('id_petugas');
             $table->string('judul');
-            $table->string('deskripsi');
+            $table->longtext('deskripsi');
             $table->date('deadline');
             $table->datetime('waktu_selesai')->nullable();
+            $table->datetime('waktu_konfirmasi')->nullable();
             $table->string('foto_tugas')->nullable();
             $table->integer('status_tugas')->default('0');
             $table->timestamps();
