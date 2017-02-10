@@ -154,6 +154,18 @@ Route::get('/selesai/{id}',[
 'uses' => 'TugasController@selesai'
 ] );
 
+Route::get('/konfirmasi/{id}',[
+'middleware' => ['auth'],
+'as' => 'tugas.konfirmasi',
+'uses' => 'TugasController@konfirmasi'
+] );
+
+Route::get('/belum/{id}',[
+'middleware' => ['auth'],
+'as' => 'tugas.belum',
+'uses' => 'TugasController@belum'
+] );
+
 Route::get('/komentar/{id}',[
 'middleware' => ['auth'],
 'as' => 'tugas.komentar',

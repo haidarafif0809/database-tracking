@@ -28,7 +28,7 @@ class TugasController extends Controller
     if ($request->ajax()) {
 
 
-      $tugas = Tugas::with(['user'])->where('status_tugas','!=','3')->orderBy('created_at','desc');
+      $tugas = Tugas::with(['user'])->where('tugas.status_tugas','!=','4')->orderBy('tugas.created_at','desc');
 
 
             return Datatables::of($tugas)->addColumn('action', function($tugas){
@@ -40,6 +40,8 @@ class TugasController extends Controller
             'komentar_url' => route('tugas.komentar',$tugas->id), 
             'proses_url' => route('tugas.proses', $tugas->id),
             'selesai_url' => route('tugas.selesai', $tugas->id),
+            'belum_url' => route('tugas.belum', $tugas->id),
+            'konfirmasi_url' => route('tugas.konfirmasi', $tugas->id),
             'edit_url' => route('data.edit', $tugas->id),
             'hapus_url' => route('data.destroy',$tugas->id),   
             'id_user' => $id_user,       
@@ -57,8 +59,12 @@ class TugasController extends Controller
                 }
                 elseif ($tugas->status_tugas == 2) {
                     # code...
-                     $status_tugas = "Sudah Selesai";
+                     $status_tugas = "Belum Di Konfirmasi";
                 }
+                elseif ($tugas->status_tugas == 3) {
+                    # code...
+                     $status_tugas = "Sudah Di Konfirmasi/Sudah Selesai";
+                } 
                 return $status_tugas;
             })->make(true);
     }
@@ -67,7 +73,8 @@ $html = $htmlBuilder
 ->addColumn(['data' => 'user.name', 'name'=>'user.name', 'title'=>'Petugas'])
 ->addColumn(['data' => 'status_tugas', 'name'=>'status_tugas', 'title'=>'Status' , 'searchable'=>false])
 ->addColumn(['data' => 'deadline', 'name'=>'deadline', 'title'=>'deadline'])
-->addColumn(['data' => 'waktu_selesai', 'name'=>'waktu_selesai', 'title'=>'waktu_selesai'])
+->addColumn(['data' => 'waktu_selesai', 'name'=>'waktu_selesai', 'title'=>'Waktu Selesai'])
+->addColumn(['data' => 'waktu_konfirmasi', 'name'=>'waktu_konfirmasi', 'title'=>'Waktu Konfirmasi'])
 ->addColumn(['data' => 'action', 'name'=>'action', 'title'=>'', 'orderable'=>false, 'searchable'=>false]); 
   
 
@@ -270,6 +277,58 @@ if ($request->hasFile('foto_tugas')) {
                $response= Telegram::sendMessage([
           'chat_id' =>   $chat_id, 
           'text' => "$name mengubah status aduan \n $tugas->judul menjadi On-Hold  "]);
+
+             Session::flash("flash_notification", [
+        "level"=>"success",
+        "message"=>"Berhasil Mengubah status tugas menjadi on-hold"
+        ]);
+ 
+        return redirect()->route('data.index');
+    }
+
+        public function belum($id){
+        $id_user = Auth::user()->id;
+
+        $tugas = Tugas::find($id);
+
+ 
+                 $tugas->status_tugas = 0;
+            $tugas->save();
+              $name = Auth::user()->name;
+
+
+            $chat_id = '242162284';
+               $response= Telegram::sendMessage([
+          'chat_id' =>   $chat_id, 
+          'text' => "$name mengubah status aduan \n $tugas->judul menjadi On-Hold  "]);
+
+
+             Session::flash("flash_notification", [
+        "level"=>"success",
+        "message"=>"Berhasil Mengubah status tugas menjadi on-hold"
+        ]);
+ 
+        return redirect()->route('data.index');
+    }
+
+         public function konfirmasi($id){
+        $id_user = Auth::user()->id;
+
+        $tugas = Tugas::find($id);
+
+ 
+            $konfirmasi = new DateTime();
+                 $tugas->status_tugas = 3;
+                 $tugas->waktu_konfirmasi = $konfirmasi;
+            $tugas->save();
+              $name = Auth::user()->name;
+
+
+            $chat_id = '242162284';
+               $response= Telegram::sendMessage([
+          'chat_id' =>   $chat_id, 
+          'text' => "$name mengubah status aduan \n $tugas->judul menjadi On-Hold  "]);
+
 
              Session::flash("flash_notification", [
         "level"=>"success",

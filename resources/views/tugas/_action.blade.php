@@ -3,14 +3,17 @@
 
 <a href="{{ $komentar_url }}" class="btn btn-sm btn-success">Komentar</a> |
 
-@if($model->status_tugas == 0 AND $model->id_petugas != $id_user)
+@if($model->status_tugas == 0 AND $model->id_petugas == $id_user)
 <a href="{{ $proses_url }}" class="btn btn-success">kerjakan</a>
 
-@elseif($model->status_tugas == 1 AND $model->id_petugas != $id_user) 
+@elseif($model->status_tugas == 1 AND $model->id_petugas == $id_user) 
 <a href="{{ $selesai_url }}" class="btn btn-success">Sudah Selesai</a>
 
-@elseif($model->status_tugas == 2  )
+@elseif($model->status_tugas == 2 AND $model->id_petugas != $id_user)
+<a href="{{ $konfirmasi_url }}" class="btn btn-success">Konfirmasi</a>
+<a href="{{ $belum_url }}" class="btn btn-success">Belum Selesai</a>
 
+@elseif($model->status_tugas != 3  )
 
 @endif
 
