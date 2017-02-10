@@ -14,7 +14,7 @@ use Telegram\Bot\Api;
 use Telegram;
 use App\Tugas;
 use DateTime;
-
+use App\Komen;
 
 class TugasController extends Controller
 {
@@ -37,6 +37,7 @@ class TugasController extends Controller
             return view('tugas._action', 
             [    
 
+            'komentar_url' => route('tugas.komentar',$tugas->id), 
             'proses_url' => route('tugas.proses', $tugas->id),
             'selesai_url' => route('tugas.selesai', $tugas->id),
             'edit_url' => route('data.edit', $tugas->id),
@@ -86,6 +87,14 @@ $html = $htmlBuilder
         return view('tugas.create');
     }
 
+    public function komentar($id){
+
+        //       
+        $tugas = Tugas::with('user')->find($id);
+        $komen = komen::with('user')->where('id_tugas',$id)->orderBy('created_at','desc')->get();
+
+        return view('tugas.komen',['tugas' => $tugas,'komen' => $komen]);
+    }
     /**
      * Store a newly created resource in storage.
      *

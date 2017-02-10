@@ -61,6 +61,7 @@
                                 <li><a href="{{ url('/tracking/pembaruan') }}">Pembaruan</a></li>
                    
                      
+                                <li><a href="{{ url('/tugas/data') }}">Tugas</a></li>
                         @endif
                     </ul>
 

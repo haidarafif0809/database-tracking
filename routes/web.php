@@ -140,6 +140,7 @@ Route::group(['prefix'=>'tugas', 'middleware'=>['auth']], function () {
 
 Route::resource('data', 'TugasController');
 
+Route::resource('komen', 'KomenController');
 
 Route::get('/proses/{id}',[
 'middleware' => ['auth'],
@@ -151,6 +152,12 @@ Route::get('/selesai/{id}',[
 'middleware' => ['auth'],
 'as' => 'tugas.selesai',
 'uses' => 'TugasController@selesai'
+] );
+
+Route::get('/komentar/{id}',[
+'middleware' => ['auth'],
+'as' => 'tugas.komentar',
+'uses' => 'TugasController@komentar'
 ] );
 
 });

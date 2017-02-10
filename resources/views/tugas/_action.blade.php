@@ -1,6 +1,8 @@
 {!! Form::model($model, ['url' => $hapus_url, 'method' => 'delete', 'class' => 'form-inline'] 
 ) !!}
 
+<a href="{{ $komentar_url }}" class="btn btn-sm btn-success">Komentar</a> |
+
 @if($model->status_tugas == 0 AND $model->id_petugas != $id_user)
 <a href="{{ $proses_url }}" class="btn btn-success">kerjakan</a>
 
