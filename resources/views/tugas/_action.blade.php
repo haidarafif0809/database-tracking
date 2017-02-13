@@ -1,5 +1,5 @@
-{!! Form::model($model, ['url' => $hapus_url, 'method' => 'delete', 'class' => 'form-inline'] 
-) !!}
+{!! Form::model($model, ['url' => $form_url, 'method' => 'delete', 'class' => 'form-inline js-confirm', 'data-confirm' => $confirm_message]) !!}
+
 
 <a href="{{ $komentar_url }}" class="btn btn-sm btn-success">Komentar</a> |
 
@@ -18,6 +18,7 @@
 @endif
 
 <a href="{{ $edit_url }}">Edit</a>
-{!! Form::submit('Hapus', ['class'=>'btn btn-xs btn-danger']) !!}
-{!! Form::close()!!}
+
+{!! Form::submit('Hapus',['class'=>'btn btn-sm btn-danger']) !!}
+{!! Form::close() !!}
 
