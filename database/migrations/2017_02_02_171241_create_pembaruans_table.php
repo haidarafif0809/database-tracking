@@ -18,8 +18,8 @@ class CreatePembaruansTable extends Migration
             $table->integer('id_aplikasi');
             $table->integer('id_user');
             $table->string('judul');
-            $table->string('pemasalahan');
-            $table->string('pemecahan');
+            $table->longtext('pemasalahan');
+            $table->longtext('pemecahan');
             $table->string('foto')->nullable();
             $table->timestamps();
         });

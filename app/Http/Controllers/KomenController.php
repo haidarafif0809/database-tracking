@@ -19,9 +19,13 @@ class KomenController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
-        //
+    public function index($id){
+
+        //       
+        $tugas = Tugas::with('user')->find($id);
+        $komen = komen::with('user')->where('id_tugas',$id)->orderBy('created_at','desc')->get();
+
+        return view('tugas.komen',['tugas' => $tugas,'komen' => $komen]);
     }
 
     /**
@@ -51,6 +55,11 @@ class KomenController extends Controller
   $komentar = Komen::create(['id_user'=> $id_user, 'id_tugas' => $request->id_tugas,'komentar' => $request->komentar ] );
 
   $tugas = Tugas::find($request->id_tugas);
+        $judul = $tugas->judul;
+
+$response= Telegram::sendMessage([
+          'chat_id' =>   env('CHAT_ID_PEMBARUAN'), 
+          'text' => "$name Menambahkan Komentar $komentar->komentar Di Tugas $tugas->judul "]);
 
 
   Session::flash("flash_notification", [
