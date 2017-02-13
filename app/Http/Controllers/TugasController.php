@@ -83,8 +83,7 @@ $html = $htmlBuilder
 
   public function status_tugas(Request $request, Builder $htmlBuilder,$id)
 {
-    if ($request->ajax()) {
-
+    if ($request->ajax()) { 
 
      $tugas = Tugas::with(['user'])->where('status_tugas','=',$id)->orderBy('created_at','desc');
 
@@ -125,6 +124,9 @@ $html = $htmlBuilder
                 return $status_tugas;
             })->make(true);
     }
+
+        $tugas = Tugas::find($id);
+
 $html = $htmlBuilder
 ->addColumn(['data' => 'judul', 'name'=>'judul', 'title'=>'Judul'])
 ->addColumn(['data' => 'user.name', 'name'=>'user.name', 'title'=>'Petugas'])
@@ -133,9 +135,8 @@ $html = $htmlBuilder
 ->addColumn(['data' => 'waktu_selesai', 'name'=>'waktu_selesai', 'title'=>'Waktu Selesai'])
 ->addColumn(['data' => 'waktu_konfirmasi', 'name'=>'waktu_konfirmasi', 'title'=>'Waktu Konfirmasi'])
 ->addColumn(['data' => 'action', 'name'=>'action', 'title'=>'', 'orderable'=>false, 'searchable'=>false]); 
-  
+return view('tugas.status',['id'=>$id])->with(compact('html')); 
 
-         return view('tugas.index')->with(compact('html')); 
 }
 
     /**
