@@ -175,7 +175,7 @@ return view('tugas.status',['id'=>$id])->with(compact('html'));
          'judul' => 'required',
          'deadline' => 'required',
          'deskripsi' => 'required',
-         'foto_tugas' => 'image|max:2048'
+         'foto_tugas' => 'required|image|max:2048'
         ]);
           $name = Auth::user()->name; 
 
