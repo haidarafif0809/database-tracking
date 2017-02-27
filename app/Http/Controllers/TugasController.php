@@ -175,7 +175,7 @@ return view('tugas.status',['id'=>$id])->with(compact('html'));
          'judul' => 'required',
          'deadline' => 'required',
          'deskripsi' => 'required',
-         'foto_tugas' => 'required|image|max:2048'
+         'foto_tugas' => 'image|max:2048'
         ]);
           $name = Auth::user()->name; 
 
@@ -185,6 +185,12 @@ return view('tugas.status',['id'=>$id])->with(compact('html'));
             'deadline' => $request->deadline,
             'deskripsi' => $request->deskripsi,
             $request->except('foto_tugas') ]);
+
+         $chat_id = env('CHAT_ID');
+
+               $response= Telegram::sendMessage([
+          'chat_id' =>    $chat_id, 
+          'text' => "$name Menambahkan Tugas $tugas->judul, Nama Petugas $user->name, Deadline : $tugas->deadline, Deskripsi : $tugas->deskripsi"]);
 
 if ($request->hasFile('foto_tugas')) {
 
@@ -199,17 +205,18 @@ if ($request->hasFile('foto_tugas')) {
 
             $tugas->foto_tugas = $filename;
             $tugas->save();
+
+        $lokasi_foto = $destinationPath."/".$filename;
+
+                 $sendPhoto = Telegram::sendPhoto([
+                  'chat_id' => $chat_id , 
+                  'photo' => $lokasi_foto, 
+                    'caption' =>  $request->judul
+                ]);
          }
 
 $user = User::find($request->id_petugas);
-               $response= Telegram::sendMessage([
-          'chat_id' =>   env('CHAT_ID_PEMBARUAN'), 
-          'text' => "$name Menambahkan Tugas $tugas->judul, Nama Petugas $user->name, Deadline : $tugas->deadline, Deskripsi : $tugas->deskripsi"]);
-
-            $response = Telegram::sendPhoto([
-              'chat_id' => env('CHAT_ID_PEMBARUAN'), 
-              'photo' => "foto_tugas/$tugas->foto_tugas"]);
-                $messageId = $response->getMessageId();
+ 
 
         Session::flash("flash_notification",[
             "level"=>"success",
@@ -270,6 +277,13 @@ $user = User::find($request->id_petugas);
             'deskripsi' => $request->deskripsi,
             $request->except('foto_tugas') ]);
 
+$user = User::find($request->id_petugas);
+
+         $chat_id = env('CHAT_ID');
+               $response= Telegram::sendMessage([
+                  'chat_id' => $chat_id , 
+          'text' => "$name Mengubah Tugas $tugas->judul, Nama Petugas $user->name, Deadline : $tugas->deadline, Deskripsi : $tugas->deskripsi"]);
+
           if ($request->hasFile('foto_tugas')) {
             $filename = null;
             $uploaded_foto_tugas = $request->file('foto_tugas');
@@ -295,19 +309,15 @@ $user = User::find($request->id_petugas);
             $tugas->foto_tugas = $filename;
             $tugas->save();
 
+        $lokasi_foto = $destinationPath."/".$filename;
+
+                 $sendPhoto = Telegram::sendPhoto([
+                  'chat_id' => $chat_id , 
+                  'photo' => $lokasi_foto, 
+                    'caption' =>  $request->judul
+                ]);
           }
-
-
-$user = User::find($request->id_petugas);
-               $response= Telegram::sendMessage([
-          'chat_id' =>   env('CHAT_ID_PEMBARUAN'), 
-          'text' => "$name Mengubah Tugas $tugas->judul, Nama Petugas $user->name, Deadline : $tugas->deadline, Deskripsi : $tugas->deskripsi"]);
-
-            $response = Telegram::sendPhoto([
-              'chat_id' => env('CHAT_ID_PEMBARUAN'), 
-              'photo' => "foto_tugas/$tugas->foto_tugas"]);
-                $messageId = $response->getMessageId();
-
+ 
         Session::flash("flash_notification",[
             "level"=>"success",
             "message"=>"Berhasil Menyimpan Tugas $tugas->judul"
