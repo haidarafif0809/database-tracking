@@ -186,10 +186,9 @@ return view('tugas.status',['id'=>$id])->with(compact('html'));
             'deskripsi' => $request->deskripsi,
             $request->except('foto_tugas') ]);
 
-         $chat_id = env('CHAT_ID');
 
                $response= Telegram::sendMessage([
-          'chat_id' =>    $chat_id, 
+          'chat_id' =>   env('CHAT_ID_PEMBARUAN'),
           'text' => "$name Menambahkan Tugas $tugas->judul, Nama Petugas $user->name, Deadline : $tugas->deadline, Deskripsi : $tugas->deskripsi"]);
 
 if ($request->hasFile('foto_tugas')) {
@@ -209,7 +208,7 @@ if ($request->hasFile('foto_tugas')) {
         $lokasi_foto = $destinationPath."/".$filename;
 
                  $sendPhoto = Telegram::sendPhoto([
-                  'chat_id' => $chat_id , 
+                  'chat_id' =>   env('CHAT_ID_PEMBARUAN'), 
                   'photo' => $lokasi_foto, 
                     'caption' =>  $request->judul
                 ]);
@@ -279,9 +278,8 @@ $user = User::find($request->id_petugas);
 
 $user = User::find($request->id_petugas);
 
-         $chat_id = env('CHAT_ID');
                $response= Telegram::sendMessage([
-                  'chat_id' => $chat_id , 
+          'chat_id' =>   env('CHAT_ID_PEMBARUAN'), 
           'text' => "$name Mengubah Tugas $tugas->judul, Nama Petugas $user->name, Deadline : $tugas->deadline, Deskripsi : $tugas->deskripsi"]);
 
           if ($request->hasFile('foto_tugas')) {
@@ -312,7 +310,7 @@ $user = User::find($request->id_petugas);
         $lokasi_foto = $destinationPath."/".$filename;
 
                  $sendPhoto = Telegram::sendPhoto([
-                  'chat_id' => $chat_id , 
+                  'chat_id' =>   env('CHAT_ID_PEMBARUAN'), 
                   'photo' => $lokasi_foto, 
                     'caption' =>  $request->judul
                 ]);

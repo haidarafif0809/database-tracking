@@ -86,11 +86,10 @@ $aplikasi = Aplikasi::find($request->id_aplikasi);
             'judul' => $request->judul,
             'pemasalahan' => $request->pemasalahan,
             'pemecahan' => $request->pemecahan,$request->except('foto') ]);
-
-         $chat_id = env('CHAT_ID');
+ 
 
                $response= Telegram::sendMessage([
-          'chat_id' =>    $chat_id, 
+          'chat_id' =>   env('CHAT_ID_PEMBARUAN'),
           'text' => "$name Menambahkan Pembaruan $pembaruans->judul, Nama Aplikasi $aplikasi->nama_aplikasi, Pemasalahan : $pembaruans->pemecahan, Pemecahan : $pembaruans->pemasalahan"]);
 
 if ($request->hasFile('foto')) {
@@ -110,7 +109,7 @@ if ($request->hasFile('foto')) {
         $lokasi_foto = $destinationPath."/".$filename;
 
                  $sendPhoto = Telegram::sendPhoto([
-                  'chat_id' => $chat_id , 
+                  'chat_id' =>   env('CHAT_ID_PEMBARUAN'), 
                   'photo' => $lokasi_foto, 
                     'caption' =>  $request->judul
                 ]);
@@ -181,8 +180,8 @@ $aplikasi = Aplikasi::find($request->id_aplikasi);
          $chat_id = env('CHAT_ID');
 
               $response= Telegram::sendMessage([
-          'chat_id' =>   env('CHAT_ID_PEMBARUAN'), 
-          'text' => "$name Mengubah Pembaruan $pembaruan->judul, Nama Aplikasi $aplikasi->nama_aplikasi, Pemasalahan : $pembaruan->pemecahan, Pemecahan : $pembaruan->pemasalahan"]);
+            'chat_id' =>   env('CHAT_ID_PEMBARUAN'),
+            'text' => "$name Mengubah Pembaruan $pembaruan->judul, Nama Aplikasi $aplikasi->nama_aplikasi, Pemasalahan : $pembaruan->pemecahan, Pemecahan : $pembaruan->pemasalahan"]);
 
           if ($request->hasFile('foto')) {
             $filename = null;
@@ -212,7 +211,7 @@ $aplikasi = Aplikasi::find($request->id_aplikasi);
         $lokasi_foto = $destinationPath."/".$filename;
 
                  $sendPhoto = Telegram::sendPhoto([
-                  'chat_id' => $chat_id , 
+                  'chat_id' =>   env('CHAT_ID_PEMBARUAN'), 
                   'photo' => $lokasi_foto, 
                     'caption' =>  $request->judul
                 ]);
