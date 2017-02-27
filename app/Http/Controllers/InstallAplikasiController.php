@@ -92,7 +92,7 @@ return view('install.index')->with(compact('html'));
         InstallAplikasi::create(['nama_aplikasi' => $request->nama_aplikasi,'lokasi_aplikasi' => $request->lokasi_aplikasi,'folder_aplikasi' => $request->folder_aplikasi,'alamat_git'=> $request->alamat_git,'user_id' => $id_user]);
 
          $response = Telegram::sendMessage([
-      'chat_id' => '242162284', 
+      'chat_id' => '-188078178', 
       'text' => "$nama_user Menginstall aplikasi $request->nama_aplikasi "
     ]);
 

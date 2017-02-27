@@ -309,7 +309,7 @@ $aplikasi = Aplikasi::find($request->aplikasi_id);
     "message"=>"Berhasil menambah Aduan Bug"
     ]);
 
-           $chat_id = '242162284';
+           $chat_id = '-188078178';
            $response= Telegram::sendMessage([
       'chat_id' =>   $chat_id, 
       'text' => "$name Membuat aduan \n $request->judul \n $request->deskripsi \n di aplikasi $aplikasi->nama_aplikasi  "
@@ -338,7 +338,7 @@ $aplikasi = Aplikasi::find($request->aplikasi_id);
             $bug->save();
               $name = Auth::user()->name;
 
-            $chat_id = '242162284';
+            $chat_id = '-188078178';
 
                $response= Telegram::sendMessage([
           'chat_id' =>   $chat_id, 
@@ -370,7 +370,7 @@ $aplikasi = Aplikasi::find($request->aplikasi_id);
 
              $name = Auth::user()->name;
 
-        $chat_id = '242162284';
+        $chat_id = '-188078178';
 
            $response= Telegram::sendMessage([
       'chat_id' =>   $chat_id, 
@@ -393,7 +393,7 @@ $aplikasi = Aplikasi::find($request->aplikasi_id);
     ]);
             $name = Auth::user()->name;
 
-        $chat_id = '242162284';
+        $chat_id = '-188078178';
 
            $response= Telegram::sendMessage([
       'chat_id' =>   $chat_id, 
@@ -416,7 +416,7 @@ $id_user = Auth::user()->id;
 
             $name = Auth::user()->name;
 
-        $chat_id = '242162284';
+        $chat_id = '-188078178';
 
            $response= Telegram::sendMessage([
       'chat_id' =>   $chat_id, 
@@ -480,7 +480,7 @@ $aplikasi = Aplikasi::find($request->aplikasi_id);
     "message"=>"Berhasil Memperbarui Aduan Bug"
     ]);
 
-           $chat_id = '242162284';
+           $chat_id = '-188078178';
            $response= Telegram::sendMessage([
       'chat_id' =>   $chat_id, 
       'text' => "$name Memperbarui aduan \n $request->judul \n $request->deskripsi \n di aplikasi $aplikasi->nama_aplikasi  "
@@ -503,7 +503,7 @@ $aplikasi = Aplikasi::find($request->aplikasi_id);
             Bug::destroy($id);
                 $name = Auth::user()->name;
 
-        $chat_id = '242162284';
+        $chat_id = '-188078178';
 
            $response= Telegram::sendMessage([
       'chat_id' =>   $chat_id, 
