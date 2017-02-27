@@ -190,7 +190,7 @@ return view('tugas.status',['id'=>$id])->with(compact('html'));
 
                $response= Telegram::sendMessage([
           'chat_id' =>    $chat_id, 
-          'text' => "$name Menambahkan Tugas $tugas->judul, Nama Petugas $user->name, Deadline : $tugas->deadline, Deskripsi : $tugas->deskripsi"]);
+          'text' => "$name Menambahkan Tugas $tugas->judul,\n Nama Petugas $user->name,\n Deadline : $tugas->deadline,\n Deskripsi : $tugas->deskripsi"]);
 
 if ($request->hasFile('foto_tugas')) {
 
@@ -282,7 +282,7 @@ $user = User::find($request->id_petugas);
          $chat_id = env('CHAT_ID');
                $response= Telegram::sendMessage([
                   'chat_id' => $chat_id , 
-          'text' => "$name Mengubah Tugas $tugas->judul, Nama Petugas $user->name, Deadline : $tugas->deadline, Deskripsi : $tugas->deskripsi"]);
+          'text' => "$name Mengubah Tugas $tugas->judul,\n Nama Petugas $user->name,\n Deadline : $tugas->deadline,\n Deskripsi : $tugas->deskripsi"]);
 
           if ($request->hasFile('foto_tugas')) {
             $filename = null;

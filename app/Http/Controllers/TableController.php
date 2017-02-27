@@ -76,7 +76,7 @@ class TableController extends Controller
      $history->save();
 
       $response = Telegram::sendMessage([
-      'chat_id' => '99811980', 
+      'chat_id' => '-183930762', 
       'text' => "$nama_user Membuat Table $table->nama_table di Database $database->nama_database "
     ]);
 
@@ -211,7 +211,7 @@ return view('table.index',['id_database' => $id,'nama_database' => $database->na
      $history->save();
 
       $response = Telegram::sendMessage([
-      'chat_id' => '99811980', 
+      'chat_id' => '-183930762', 
       'text' => "$nama_user Menghapus Table $table->nama_table di Database $database->nama_database "
     ]);
 
