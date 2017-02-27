@@ -53,7 +53,7 @@ class DetailController extends Controller
   $pembaruan = Pembaruan::find($request->id_pembaruan);
 
 $response= Telegram::sendMessage([
-          'chat_id' =>   env('CHAT_ID_PEMBARUAN'), 
+          'chat_id' =>   env('CHAT_ID'), 
           'text' => "$name Menambahkan Komentar $detail->detail Di Detail $pembaruan->judul "]);
 
   Session::flash("flash_notification", [

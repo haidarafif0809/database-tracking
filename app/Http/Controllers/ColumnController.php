@@ -85,7 +85,7 @@ class ColumnController extends Controller
     ]);
        
     $response = Telegram::sendMessage([
-      'chat_id' => '-188078178', 
+      'chat_id' => '99811980', 
       'text' => "$nama_user Melakukan Penambahan Column $column->nama_column di Table $table->nama_table di Database $database->nama_database "
     ]);
 
@@ -204,7 +204,7 @@ return view('column.index',['id_table' => $id,'id_database' => $table->id_databa
          $database = Database::find($table->id_database);
 
   $response = Telegram::sendMessage([
-      'chat_id' => '-188078178', 
+      'chat_id' => '99811980', 
       'text' => "$nama_user Melakukan Perubahan Column $request->nama_column di Table $table->nama_table di Database $database->nama_database "
     ]);
        
@@ -231,7 +231,7 @@ $column = Column::find($id);
 
          $database = Database::find($table->id_database);
   $response = Telegram::sendMessage([
-      'chat_id' => '-188078178', 
+      'chat_id' => '99811980', 
       'text' => "$nama_user Menghapus Column $column->nama_column di Table $table->nama_table di Database $database->nama_database "
     ]);
        

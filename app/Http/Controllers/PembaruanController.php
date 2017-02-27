@@ -87,7 +87,7 @@ $aplikasi = Aplikasi::find($request->id_aplikasi);
             'pemasalahan' => $request->pemasalahan,
             'pemecahan' => $request->pemecahan,$request->except('foto') ]);
 
-         $chat_id = env('CHAT_ID_PEMBARUAN');
+         $chat_id = env('CHAT_ID');
 
                $response= Telegram::sendMessage([
           'chat_id' =>    $chat_id, 
@@ -178,7 +178,7 @@ $aplikasi = Aplikasi::find($request->id_aplikasi);
           $pembaruan = Pembaruan::find($id);
           $pembaruan->update(['id_user'=>$id_user,'id_aplikasi' => $request->id_aplikasi,'judul' => $request->judul,'pemasalahan' => $request->pemasalahan,'pemecahan' => $request->pemecahan,$request->except('foto') ]);
 
-         $chat_id = env('CHAT_ID_PEMBARUAN');
+         $chat_id = env('CHAT_ID');
 
               $response= Telegram::sendMessage([
           'chat_id' =>    $chat_id, 
@@ -253,7 +253,7 @@ $aplikasi = Aplikasi::find($request->id_aplikasi);
 
  $name = Auth::user()->name;
           $response= Telegram::sendMessage([
-          'chat_id' =>   env('CHAT_ID_PEMBARUAN'), 
+          'chat_id' =>   env('CHAT_ID'), 
           'text' => "$name Menghapus Pembaruan $judul"]);
 
         Session::flash("flash_notification", [

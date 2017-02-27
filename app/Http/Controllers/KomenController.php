@@ -58,7 +58,7 @@ class KomenController extends Controller
         $judul = $tugas->judul;
 
 $response= Telegram::sendMessage([
-          'chat_id' =>   env('CHAT_ID_PEMBARUAN'), 
+          'chat_id' =>   env('CHAT_ID'), 
           'text' => "$name Menambahkan Komentar $komentar->komentar Di Tugas $tugas->judul "]);
 
 

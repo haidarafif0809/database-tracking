@@ -186,7 +186,7 @@ return view('tugas.status',['id'=>$id])->with(compact('html'));
             'deskripsi' => $request->deskripsi,
             $request->except('foto_tugas') ]);
 
-         $chat_id = env('CHAT_ID_PEMBARUAN');
+         $chat_id = env('CHAT_ID');
 
                $response= Telegram::sendMessage([
           'chat_id' =>    $chat_id, 
@@ -279,7 +279,7 @@ $user = User::find($request->id_petugas);
 
 $user = User::find($request->id_petugas);
 
-         $chat_id = env('CHAT_ID_PEMBARUAN');
+         $chat_id = env('CHAT_ID');
                $response= Telegram::sendMessage([
                   'chat_id' => $chat_id , 
           'text' => "$name Mengubah Tugas $tugas->judul, Nama Petugas $user->name, Deadline : $tugas->deadline, Deskripsi : $tugas->deskripsi"]);
@@ -339,7 +339,7 @@ $user = User::find($request->id_petugas);
 
 
         $response= Telegram::sendMessage([
-          'chat_id' =>   env('CHAT_ID_PEMBARUAN'), 
+          'chat_id' =>   env('CHAT_ID'), 
           'text' => "$name Sedang Mengerjakan Tugas $judul"]);
 
 
@@ -365,7 +365,7 @@ $user = User::find($request->id_petugas);
 
 
         $response= Telegram::sendMessage([
-          'chat_id' =>   env('CHAT_ID_PEMBARUAN'), 
+          'chat_id' =>   env('CHAT_ID'), 
           'text' => "$name Sudah Selesai Mengerjakan Tugas $judul"]);
 
              Session::flash("flash_notification", [
@@ -390,7 +390,7 @@ $user = User::find($request->id_petugas);
 
 $user = User::find($tugas->id_petugas);
         $response= Telegram::sendMessage([
-          'chat_id' =>   env('CHAT_ID_PEMBARUAN'), 
+          'chat_id' =>   env('CHAT_ID'), 
           'text' => "$name Menguba Status Belum Di kerjakan Di Karenakan Tugas Belum Selesai,Judul Tugas : $judul, Nama Petugas : $user->name "]);
 
 
@@ -417,7 +417,7 @@ $user = User::find($tugas->id_petugas);
 
 $user = User::find($tugas->id_petugas);
         $response= Telegram::sendMessage([
-          'chat_id' =>   env('CHAT_ID_PEMBARUAN'), 
+          'chat_id' =>   env('CHAT_ID'), 
           'text' => "$name Mengubah Status Sudah Di Konfirmasi Tugas $judul, Nama Petugas : $user->name "]);
 
 
@@ -457,7 +457,7 @@ $user = User::find($tugas->id_petugas);
 $user = User::find($tugas->id_petugas);
  $name = Auth::user()->name;
           $response= Telegram::sendMessage([
-          'chat_id' =>   env('CHAT_ID_PEMBARUAN'), 
+          'chat_id' =>   env('CHAT_ID'), 
           'text' => "$name Menghapus Tugas $user->name Judul Tugas $judul"]);
 
         Session::flash("flash_notification", [
