@@ -17,7 +17,7 @@
 <div class="form-group{{ $errors->has('deadline') ? ' has-error' : '' }}">
 {!! Form::label('deadline', 'Deadline', ['class'=>'col-md-2 control-label']) !!}
 <div class="col-md-4">
-{!! Form::date('deadline', null, ['class'=>'form-control']) !!}
+{!! Form::text('deadline', null, ['class'=>'form-control datepicker', 'data-date-format'=>'yyyy/mm/dd']) !!}
 {!! $errors->first('deadline', '<p class="help-block">:message</p>') !!}
 </div>
 </div>
