@@ -91,7 +91,7 @@ $aplikasi = Aplikasi::find($request->id_aplikasi);
 
                $response= Telegram::sendMessage([
           'chat_id' =>    $chat_id, 
-          'text' => "$name Menambahkan Pembaruan $pembaruans->judul, Nama Aplikasi $aplikasi->nama_aplikasi,\n Pemasalahan : $pembaruans->pemecahan,\n Pemecahan : $pembaruans->pemasalahan"]);
+          'text' => "$name Menambahkan Pembaruan $pembaruans->judul,\n Nama Aplikasi $aplikasi->nama_aplikasi,\n Pemasalahan : $pembaruans->pemecahan,\n Pemecahan : $pembaruans->pemasalahan"]);
 
 if ($request->hasFile('foto')) {
 
@@ -182,7 +182,7 @@ $aplikasi = Aplikasi::find($request->id_aplikasi);
 
               $response= Telegram::sendMessage([
           'chat_id' =>    $chat_id, 
-          'text' => "$name Mengubah Pembaruan $pembaruan->judul, Nama Aplikasi $aplikasi->nama_aplikasi,\n Pemasalahan : $pembaruan->pemecahan,\n Pemecahan : $pembaruan->pemasalahan"]);
+          'text' => "$name Mengubah Pembaruan $pembaruan->judul,\n Nama Aplikasi $aplikasi->nama_aplikasi,\n Pemasalahan : $pembaruan->pemecahan,\n Pemecahan : $pembaruan->pemasalahan"]);
 
           if ($request->hasFile('foto')) {
             $filename = null;

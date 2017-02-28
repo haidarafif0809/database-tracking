@@ -186,6 +186,7 @@ return view('tugas.status',['id'=>$id])->with(compact('html'));
             'deskripsi' => $request->deskripsi,
             $request->except('foto_tugas') ]);
 
+$user = User::find($request->id_petugas);
          $chat_id = env('CHAT_ID');
 
                $response= Telegram::sendMessage([
